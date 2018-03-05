@@ -41,7 +41,7 @@ export default new vuex.Store({
         },
         login({commit, dispatch}, payload){
             auth
-                .post('login')
+                .post('login', payload)
                     .then(res => {
                         commit('setUser', res.data)
                         router.push({name: 'Home'})
@@ -53,7 +53,7 @@ export default new vuex.Store({
         },
         createUser({commit, dispatch}, payload){
             auth
-                .post('register')
+                .post('register', payload)
                     .then(res => {
                         alert("user was created successfully")
                         router.push({name: 'Login'})

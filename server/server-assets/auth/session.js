@@ -2,8 +2,7 @@ var expressSession = require("express-session");
 var mongoStore = require("connect-mongodb-session")(expressSession);
 
 var store = new mongoStore({
-  // uri: "mongodb://test:test@ds044907.mlab.com:44907/delete-me",
-  uri: 'mongodb://test:test@ds044907.mlab.com:44907/mwm-db',
+  uri: 'mongodb://kanban:kanban@ds012578.mlab.com:12578/kanban',
   collection: "Sessions"
 });
 

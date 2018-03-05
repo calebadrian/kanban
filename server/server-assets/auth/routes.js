@@ -6,7 +6,7 @@ var errorMessage = { error: "Invalid Auth" };
 
 router.post("/auth/register", (req, res) => {
   // @ts-ignore
-  req.body.password = Users.generateHash(req.body.password);
+  req.body.password = Users.generateHash(req.body.password)
   req.body.role = 'public'
   Users.create(req.body)
     .then(user => {
