@@ -1,16 +1,15 @@
 <template>
     <div class="login">
-        <form v-if="showLogin == true" @submit.prevent="login">
+        <form v-if="showLogin == true" @submit.prevent="login()">
             <input type="text" v-model="user.email" placeholder="email">
             <input type="password" v-model="user.password" placeholder="password">
             <button type="submit">Submit</button>
         </form>
 
-        <form v-if="showLogin == false" @submit.prevent="createUser">
-            <input type="text" v-model="user.name" placeholder="username">
-            <input type="text" v-model="user.email" placeholder="email">
-            <input type="password" v-model="user.password" placeholder="password">
-            <input type="password" v-model="user.password" placeholder="password">
+        <form v-if="showLogin == false" @submit.prevent="createUser()">
+            <input type="text" v-model="newUser.name" placeholder="username">
+            <input type="text" v-model="newUser.email" placeholder="email">
+            <input type="password" v-model="newUser.password" placeholder="password">
             <button type="submit" @click="showLogin = true">Submit</button>
         </form>
 
@@ -25,8 +24,12 @@
         name: 'Login',
         data() {
             return {
-                showLogin : true,
+                showLogin: true,
                 user: {
+                    email: '',
+                    password: ''
+                },
+                newUser: {
                     name: '',
                     email: '',
                     password: ''
@@ -38,7 +41,7 @@
                 this.$store.dispatch('login', this.user)
             },
             createUser() {
-                this.$store.dispatch('createUser', this.user)
+                this.$store.dispatch('createUser', this.newUser)
             }
         }
     }
