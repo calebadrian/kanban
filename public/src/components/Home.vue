@@ -5,8 +5,6 @@
 </template>
 
 <script>
-  import Login from './Login'
-
   export default {
     name: 'Home',
     data() {
@@ -15,7 +13,7 @@
       }
     },
     components: {
-      Login
+      User
     }
   }
 
