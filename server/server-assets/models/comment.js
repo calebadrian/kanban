@@ -1,12 +1,12 @@
 var mongoose = require("mongoose")
 var Schema = mongoose.Schema
 var ObjectId = mongoose.SchemaTypes.ObjectId
-var SchemaName = "Board"
+var SchemaName = "Comment"
 
 var schema = new Schema({
-    name: {type: String, required: true},
-    creatorId: {type: ObjectId, ref: 'User', required: true},
-    description: {type: String}
+    taskId: {type: ObjectId, ref: 'Task'},
+    creatorId: {type: ObjectId, ref: 'User'},
+    description: {type: String, required: true}
 })
 
 module.exports = mongoose.model(SchemaName, schema)
