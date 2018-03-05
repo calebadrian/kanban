@@ -11,7 +11,7 @@
             <input type="text" v-model="user.email" placeholder="email">
             <input type="password" v-model="user.password" placeholder="password">
             <input type="password" v-model="user.password" placeholder="password">
-            <button type="submit" @click"showLogin = true">Submit</button>
+            <button type="submit" @click="showLogin = true">Submit</button>
         </form>
 
         <button @click="showLogin = false">Create User</button>
@@ -25,7 +25,7 @@
         name: 'Login',
         data() {
             return {
-                showlogin : true,
+                showLogin : true,
                 user: {
                     name: '',
                     email: '',
