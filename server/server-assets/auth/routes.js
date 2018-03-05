@@ -1,5 +1,6 @@
 var router = require("express").Router();
 var Users = require("../models/user");
+var session = require("../auth/session")
 
 var errorMessage = { error: "Invalid Auth" };
 
@@ -15,6 +16,7 @@ router.post("/auth/register", (req, res) => {
       user.password = null;
       delete user.password;
       req.session.uid = user._id
+      //@ts-ignore
       req.session.save()
       return res.send(user);
     })
@@ -33,6 +35,7 @@ router.post("/auth/login", (req, res) => {
     user.password = null;
     delete user.password;
     req.session.uid = user._id
+    //@ts-ignore
     req.session.save()
     return res.send(user);
   });
