@@ -5,16 +5,13 @@
 </template>
 
 <script>
-  import Home from './components/Home'
+  import router from './router'
 
 export default {
   name: 'App',
   mounted(){
     this.$store.dispatch('authenticate')
   },
-  components:{
-    Home
-  }
 }
 </script>
 
