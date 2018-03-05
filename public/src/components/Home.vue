@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h3>Hey</h3>
+    <h3>Chad</h3>
   </div>
 </template>
 
@@ -22,4 +22,5 @@
 
 
 <style scoped>
+  
 </style>
