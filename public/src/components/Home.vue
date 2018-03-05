@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  import User from './User'
   export default {
     name: 'Home',
     data() {
