@@ -6,6 +6,7 @@ require('./server-assets/db/mlab-config');
 var port = 3000;
 var session = require("./server-assets/auth/session");
 var authRoutes = require("./server-assets/auth/routes");
+var boardRoutes = require("./server-assets/routes/boards")
 
 var whitelist = ['http://localhost:8080'];
 var corsOptions = {
@@ -22,14 +23,15 @@ server.use(bp.json());
 server.use(bp.urlencoded({extended: true}));
 
 server.use(authRoutes);
+server.use(boardRoutes)
 
-// server.use("/api/*", (req, res, next) => {
-//     if (req.method.toLowerCase() !== "get" && !req.session.uid) {
-//         return res.status(401).send({ error: "PLEASE LOGIN TO CONTINUE" });
-//     }
+server.use("/api/*", (req, res, next) => {
+    if (req.method.toLowerCase() !== "get" && !req.session.uid) {
+        return res.status(401).send({ error: "PLEASE LOGIN TO CONTINUE" });
+    }
     
-//     next();
-// });
+    next();
+});
 
 
 server.use('*', (err,req,res,next) =>{
