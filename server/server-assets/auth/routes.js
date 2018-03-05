@@ -55,6 +55,12 @@ router.get('/auth/authenticate', (req, res) => {
     })
 })
 
+router.delete('/auth/logout', (req, res) => {
+  //@ts-ignore
+  req.session.destroy()
+  res.send("Successfully logged out")
+})
+
 
 
 
