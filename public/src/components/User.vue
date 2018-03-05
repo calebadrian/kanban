@@ -9,9 +9,17 @@
 
     export default {
         name: 'User',
+        mounted(){
+            this.$store.dispatch('getBoards')
+        },
         data() {
             return {
 
+            }
+        },
+        methods: {
+            createBoard(){
+                this.$store.dispatch('addBoard', this.board)
             }
         },
         components: {

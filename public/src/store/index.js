@@ -19,7 +19,8 @@ vue.use(vuex)
 
 export default new vuex.Store({
     state: {
-        user: {}
+        user: {},
+        boards: []
     },
     mutations: {
         setUser(state, payload){
@@ -62,6 +63,26 @@ export default new vuex.Store({
                         console.log("Invalid username or password")
                         router.push({name: 'Login'})
                     })
+        },
+        getBoards({commit, dispatch}){
+            api
+                .get('boards')
+                .then(res => {
+                    commit('setBoards', res.data)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        addBoards({commit, dispatch}, payload){
+            api
+                .post('boards', payload)
+                .then(res => {
+                    dispatch('getBoards')
+                })
+                .catch(err => {
+                    console.error(err)
+                })
         }
     }
 })
