@@ -64,6 +64,16 @@ export default new vuex.Store({
                         router.push({name: 'Login'})
                     })
         },
+        logout({commit, dispatch}){
+            auth
+                .delete('logout')
+                .then(res => {
+                    router.push({name: 'Login'})
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
         getBoards({commit, dispatch}){
             api
                 .get('boards')

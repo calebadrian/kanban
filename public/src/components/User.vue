@@ -1,6 +1,8 @@
 <template>
     <div class="user">
-
+        <div v-for="board in boards">
+            <board></board>
+        </div>
     </div>
 </template>
 
