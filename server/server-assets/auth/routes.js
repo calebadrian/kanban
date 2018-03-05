@@ -24,7 +24,6 @@ router.post("/auth/register", (req, res) => {
 });
 
 router.post("/auth/login", (req, res) => {
-  console.log(req)
   Users.findOne({ email: req.body.email }).then(user => {
     if (!user) {
       return res.status(401).send(errorMessage);

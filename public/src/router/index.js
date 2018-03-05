@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 //@ts-ignore
 import Login from '@/components/Login'
+//@ts-ignore
+import Board from '@/components/Board'
 
 Vue.use(Router)
 
@@ -18,6 +20,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/boards/:boardid/lists',
+      name: 'Board',
+      component: Board
     }
   ]
 })

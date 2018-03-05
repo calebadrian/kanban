@@ -20,11 +20,15 @@ vue.use(vuex)
 export default new vuex.Store({
     state: {
         user: {},
-        boards: []
+        boards: [],
+        activeBoard: {}
     },
     mutations: {
         setUser(state, payload){
             state.user = payload
+        },
+        setBoards(state, payload){
+            state.boards = payload
         }
     },
     actions: {
@@ -84,9 +88,19 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        addBoards({commit, dispatch}, payload){
+        addBoard({commit, dispatch}, payload){
             api
                 .post('boards', payload)
+                .then(res => {
+                    dispatch('getBoards')
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        removeBoard({commit, dispatch}, payload){
+            api
+                .delete('boards/' + payload._id)
                 .then(res => {
                     dispatch('getBoards')
                 })
