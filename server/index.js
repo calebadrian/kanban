@@ -23,13 +23,13 @@ server.use(bp.urlencoded({extended: true}));
 
 server.use(authRoutes);
 
-server.use("/api/*", (req, res, next) => {
-    if (req.method.toLowerCase() !== "get" && !req.session.uid) {
-        return res.status(401).send({ error: "PLEASE LOGIN TO CONTINUE" });
-    }
+// server.use("/api/*", (req, res, next) => {
+//     if (req.method.toLowerCase() !== "get" && !req.session.uid) {
+//         return res.status(401).send({ error: "PLEASE LOGIN TO CONTINUE" });
+//     }
     
-    next();
-});
+//     next();
+// });
 
 
 server.use('*', (err,req,res,next) =>{
