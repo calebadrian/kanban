@@ -1,10 +1,21 @@
 <template>
     <div class="singleBoard">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="/#/">
+                <img src="../assets/Omeganize_logo4.jpg" width="35" height="30" class="d-inline-block align-top" alt=""> &#937;meganize
+            </a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <h3 class="nav-link" v-if="activeBoard[0]">{{activeBoard[0].name}}</h3>
+                </li>
+            </ul>
+            <h6 class="nav-link">{{user.name}}</h6>
+            <button @click="logout" class="btn btn-info">Logout</button>
+        </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
                     <div v-if="activeBoard[0]">
-                        <h4>{{activeBoard[0].name}}</h4>
                         <h5>{{activeBoard[0].description}}</h5>
                         <form @submit.prevent="createList">
                             <input type="text" v-model="list.name" placeholder="name">
@@ -40,7 +51,10 @@
                 this.list.creatorId = this.$store.state.user._id
                 this.list.boardId = this.$store.state.activeBoard[0]._id
                 this.$store.dispatch('addList', this.list)
-            }
+            },
+            logout() {
+                this.$store.dispatch('logout')
+            },
         },
         computed: {
             activeBoard() {
@@ -48,6 +62,9 @@
             },
             activeLists() {
                 return this.$store.state.activeLists
+            },
+            user() {
+                return this.$store.state.user
             }
         },
         components: {
@@ -57,5 +74,18 @@
     }
 </script>
 
-<style>
+<style scoped>
+    .navbar {
+        background-color: black;
+        font-family: Cinzel;
+        height: 15vh
+    }
+
+    .nav-link {
+        color: #36afc2 !important;
+    }
+
+    .navbar-brand {
+        color: #36afc2 !important;
+    }
 </style>
