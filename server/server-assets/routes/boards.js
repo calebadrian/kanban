@@ -103,6 +103,7 @@ router.put("/api/boards/:boardid/lists/:listid/tasks/:taskid/comments/:commentid
 router.delete("/api/boards/:boardid", (req, res, next) => {
     Boards.findByIdAndRemove(req.params.boardid)
         .then(board => {
+            board.remove()
             return res.send({message: "Successfully deleted board"})
         })
         .catch(next)
@@ -111,6 +112,7 @@ router.delete("/api/boards/:boardid", (req, res, next) => {
 router.delete("/api/boards/:boardid/lists/:listid", (req, res, next) => {
     Lists.findByIdAndRemove(req.params.listid)
         .then(list => {
+            list.remove()
             return res.send({message: "Successfully deleted list"})
         })
         .catch(next)
@@ -118,7 +120,8 @@ router.delete("/api/boards/:boardid/lists/:listid", (req, res, next) => {
 
 router.delete("/api/boards/:boardid/lists/:listid/tasks/:taskid", (req, res, next) => {
     Tasks.findByIdAndRemove(req.params.taskid)
-        .then(list => {
+        .then(task => {
+            task.remove()
             return res.send({message: "Successfully deleted task"})
         })
         .catch(next)

@@ -7,6 +7,7 @@ const SALT_FACTOR = 13;
 
 var schema = new Schema({
   name: { type: String},
+  avatar: {type: String, default: '//robohash.org'+this.name+".png"},
   email: { type: String, required: true, unique: true, lowercase: true },
   password: { type: String, required: true, minlength: 6 },
   created: { type: Number, default: Date.now(), required: true },

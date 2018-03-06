@@ -12,6 +12,7 @@
             <input type="text" v-model="newUser.name" placeholder="username" class="form-control">
             <input type="text" v-model="newUser.email" placeholder="email" class="form-control">
             <input type="password" v-model="newUser.password" placeholder="password" class="form-control">
+            <input type="password" v-model="newUser.confirmPassword" placeholder="confirm password" class="form-control">
             <button type="submit" @click="showLogin = true" class="btn btn-info">Submit</button>
         </form>
 
@@ -38,7 +39,8 @@
                 newUser: {
                     name: '',
                     email: '',
-                    password: ''
+                    password: '',
+                    confirmPassword: ''
                 }
             }
         },
@@ -47,6 +49,10 @@
                 this.$store.dispatch('login', this.user)
             },
             createUser() {
+                if (this.newUser.password !== this.newUser.confirmPassword){
+                    alert("Passwords do not match!")
+                    return
+                }
                 this.$store.dispatch('createUser', this.newUser)
             }
         }
