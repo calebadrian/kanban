@@ -4,9 +4,11 @@ var ObjectId = mongoose.SchemaTypes.ObjectId
 var SchemaName = "Comment"
 
 var schema = new Schema({
-    taskId: {type: ObjectId, ref: 'Task'},
-    creatorId: {type: ObjectId, ref: 'User'},
-    description: {type: String, required: true}
+    taskId: {type: ObjectId, ref: 'Task', required: true},
+    listId: {type: ObjectId, ref: 'List', required: true},
+    boardId: {type: ObjectId, ref: 'Board', required: true},
+    creatorId: {type: ObjectId, ref: 'User', required: true},
+    body: {type: String, required: true}
 })
 
 module.exports = mongoose.model(SchemaName, schema)

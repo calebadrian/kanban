@@ -23,7 +23,8 @@ export default new vuex.Store({
         boards: [],
         activeBoard: {},
         activeLists: [],
-        activeTasks: []
+        activeTasks: [],
+        activeComments: []
     },
     mutations: {
         setUser(state, payload){
@@ -40,6 +41,9 @@ export default new vuex.Store({
         },
         setActiveTasks(state, payload){
             vue.set(state.activeTasks, payload.listId, payload.activeTasks || [])
+        },
+        setActiveComments(state, payload){
+            vue.set(state.activeComments, payload.taskId, payload.activeComments || [])
         }
     },
     actions: {
@@ -177,6 +181,36 @@ export default new vuex.Store({
                 .get('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks')
                 .then(res => {
                     commit('setActiveTasks', {listId: payload.listId, activeTasks: res.data})
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        getComments({commit, dispatch}, payload){
+            api
+                .get('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload._id + '/comments')
+                .then(res => {
+                    commit('setActiveComments', {taskId: payload._id, activeComments: res.data})
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        addComment({commit, dispatch}, payload){
+            api
+                .post('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + '/comments', payload)
+                .then(res => {
+                    dispatch('getCommentsAfterAdd', res.data)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        getCommentsAfterAdd({commit, dispatch}, payload){
+            api
+                .get('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + '/comments')
+                .then(res => {
+                    commit('setActiveComments', {taskId: payload.taskId, activeComments: res.data})
                 })
                 .catch(err => {
                     console.error(err)
