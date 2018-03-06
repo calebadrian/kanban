@@ -6,6 +6,9 @@
             </a>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
+                    <img :src="user.avatar" width="60" height="50" class="d-inline-block align-top" alt="">
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link">{{user.name}}</a>
                 </li>
             </ul>
