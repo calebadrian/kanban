@@ -1,14 +1,20 @@
 <template>
     <div class="singleBoard">
-        <div v-if="activeBoard[0]">
-            <h4>{{activeBoard[0].name}}</h4>
-            <h5>{{activeBoard[0].description}}</h5>
-            <form @submit.prevent="createList">
-                <input type="text" v-model="list.name" placeholder="name">
-                <button type="submit">Submit List</button>
-            </form>
-            <div v-for="list in activeLists">
-                <list :list="list"></list>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div v-if="activeBoard[0]">
+                        <h4>{{activeBoard[0].name}}</h4>
+                        <h5>{{activeBoard[0].description}}</h5>
+                        <form @submit.prevent="createList">
+                            <input type="text" v-model="list.name" placeholder="name">
+                            <button type="submit">Submit List</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-3" v-for="list in activeLists">
+                    <list :list="list"></list>
+                </div>
             </div>
         </div>
     </div>

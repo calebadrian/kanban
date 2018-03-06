@@ -215,6 +215,19 @@ export default new vuex.Store({
                 .catch(err => {
                     console.error(err)
                 })
+        },
+        setTask({commit, dispatch}, payload){
+            var temp = payload.task
+            payload.task.listId = payload.list._id
+            api
+                .put('boards/' + payload.list.boardId + '/lists/' + payload.list._id + '/tasks/' + payload.task._id, payload.task)
+                .then(res => {
+                    dispatch('getTasks', payload.list)
+                    dispatch('getTasks', {boardId: temp.boardId, _id: temp.listId})
+                })
+                .catch(err => {
+                    console.error(err)
+                })
         }
 
     }
