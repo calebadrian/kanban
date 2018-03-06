@@ -31,7 +31,7 @@
             createTask(list){
                 this.task.creatorId = this.$store.state.user._id
                 this.task.listId = list._id
-                this.task.boardId = this.$store.state.activeBoard._id
+                this.task.boardId = this.$store.state.activeBoard[0]._id
                 this.$store.dispatch('addTask', this.task)
             }
         },
