@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-            <img src="../assets/Omeganize_logo2.jpg" class="logo">
+        <img src="../assets/Omeganize_logo2.jpg" class="logo">
 
         <form v-if="showLogin == true" @submit.prevent="login()" class="form-group">
             <input type="text" v-model="user.email" placeholder="email" class="form-control">
@@ -15,9 +15,11 @@
             <button type="submit" @click="showLogin = true" class="btn btn-info">Submit</button>
         </form>
 
-        <div class="bg-1">
-            <button @click="showLogin = false" class="btn btn-link">Create User</button>
-            <button @click="showLogin = true" class="btn btn-link">Login</button>
+        <div class="d-flex justify-content-center">
+            <div class="bg-1">
+                <button @click="showLogin = false" class="btn btn-link">Create User</button>
+                <button @click="showLogin = true" class="btn btn-link">Login</button>
+            </div>
         </div>
 
     </div>
@@ -83,7 +85,9 @@
         background-color: rgba(218, 216, 216, 0.596);
         display: flex;
         flex-direction: row;
-        justify-content: space-around
+        justify-content: space-around;
+        width: 70%;
+        border-radius: 30px
     }
 
     .btn-link {
@@ -92,6 +96,6 @@
     }
 
     .btn-info {
-        width: 25%
+        width: 20%
     }
 </style>
