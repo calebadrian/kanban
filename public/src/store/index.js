@@ -22,7 +22,8 @@ export default new vuex.Store({
         user: {},
         boards: [],
         activeBoard: {},
-        activeLists: []
+        activeLists: [],
+        activeTasks: []
     },
     mutations: {
         setUser(state, payload){
@@ -36,6 +37,9 @@ export default new vuex.Store({
         },
         setActiveLists(state, payload){
             state.activeLists = payload
+        },
+        setActiveTasks(state, payload){
+            vue.set(state.activeTasks, payload.listId, payload.activeTasks || [])
         }
     },
     actions: {
@@ -137,6 +141,47 @@ export default new vuex.Store({
                 .catch(err => {
                     console.error(err)
                 })
+        },
+        addList({commit, dispatch}, payload){
+            api
+                .post('boards/' + payload.boardId + '/lists/', payload)
+                .then(res => {
+                    dispatch('getLists', payload.boardId)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        getTasks({commit, dispatch}, payload){
+            api
+                .get('boards/' + payload.boardId + '/lists/' + payload._id + '/tasks')
+                .then(res => {
+                    commit('setActiveTasks', {listId: payload._id, activeTasks: res.data})
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        addTask({commit, dispatch}, payload){
+            api
+                .post('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks', payload)
+                .then(res => {
+                    dispatch('getTasksAfterAdd', payload)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        getTasksAfterAdd({commit, dispatch}, payload){
+            api
+                .get('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks')
+                .then(res => {
+                    commit('setActiveTasks', {listId: payload.listId, activeTasks: res.data})
+                })
+                .catch(err => {
+                    console.error(err)
+                })
         }
+
     }
 })
