@@ -1,8 +1,8 @@
 <template>
     <div class="user">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="#">
-                <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Bootstrap
+                <img src="../assets/Omeganize_logo4.jpg" width="35" height="30" class="d-inline-block align-top" alt=""> &#937;meganize
             </a>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
@@ -11,7 +11,7 @@
                     </li>
                 </ul>
             </div>
-            <button @click="logout">Logout</button>
+            <button @click="logout" class="btn btn-info">Logout</button>
         </nav>
         <div class="container-fluid">
             <div class="row">
@@ -72,4 +72,16 @@
 
 
 <style scoped>
+    .navbar {
+        background-color: black;
+        font-family: Cinzel; 
+    }
+
+    .nav-link {
+        color: rgb(54, 178, 235) !important;
+    }
+
+    .navbar-brand {
+        color: rgb(54, 178, 235) !important;
+    }
 </style>
