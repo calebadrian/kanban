@@ -48,6 +48,9 @@
             },
             activeLists() {
                 return this.$store.state.activeLists
+            },
+            user(){
+                return this.$store.state.user
             }
         },
         components: {

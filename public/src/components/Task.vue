@@ -54,7 +54,6 @@
                 this.comment.creatorId = this.$store.state.user._id
                 this.comment.listId = this.task.listId
                 this.comment.boardId = this.task.boardId
-                console.log(this.comment)
                 this.$store.dispatch('addComment', this.comment)
             },
             moveTask(list){
