@@ -12,7 +12,7 @@ var schema = new Schema({
     description: {type: String}
 })
 
-schema.pre('findByIdAndRemove', function(next) {
+schema.pre('remove', function(next) {
     Lists.remove({boardId: this._id}).exec()
     Tasks.remove({boardId: this._id}).exec()
     Comments.remove({boardId: this._id}).exec()
