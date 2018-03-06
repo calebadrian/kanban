@@ -1,8 +1,14 @@
 <template>
     <div class="board">
-        <h4><router-link :to="{name: 'Board', params: {boardId: board._id}}">{{board.name}}</router-link></h4>
-        <h4>{{board.description}}</h4>
-        <button @click="removeBoard(board)">Remove {{board.name}}</button>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="title">
+                    <router-link :to="{name: 'Board', params: {boardId: board._id}}" class="title">{{board.name}}</router-link>
+                </h4>
+                <h6>{{board.description}}</h6>
+                <button @click="removeBoard(board)" class="btn btn-link">Remove {{board.name}}</button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -17,10 +23,10 @@
             }
         },
         methods: {
-            removeBoard(board){
+            removeBoard(board) {
                 this.$store.dispatch('removeBoard', board)
             },
-            setActiveBoard(board){
+            setActiveBoard(board) {
                 this.$store.dispatch('setActiveBoard', board)
             }
         },
@@ -33,4 +39,34 @@
 
 
 <style scoped>
+    .card {
+        background-color: rgba(151, 183, 197, 0.5);
+        box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
+        border: rgb(167, 169, 180) solid .5px
+    }
+
+    .title {
+        font-family: Cinzel;
+        color:rgb(24, 133, 141);
+        transition: linear .3s all;
+    }
+
+    .title:hover {
+        transition: linear .3s all;
+        color:rgb(7, 164, 179);
+    }
+
+    .btn-link {
+        transition: linear .3s all;
+        margin-top: 15px;
+        margin-bottom: -15px;
+        color: grey
+    }
+
+    .btn-link:hover {
+        transition: linear .3s all;
+        color: rgb(253, 71, 71)
+    }
+
+
 </style>
