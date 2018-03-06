@@ -8,6 +8,7 @@ var priorities = ["high", "medium", "low"]
 var schema = new Schema({
     creatorId: {type: ObjectId, ref: 'User'},
     listId: {type: ObjectId, ref: 'List'},
+    boardId: {type: ObjectId, ref: 'Board'},    
     description: {type: String},
     priority: {type: String, enum: priorities, default: priorities[1]}
 })
