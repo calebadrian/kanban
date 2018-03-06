@@ -5,7 +5,7 @@ import Home from '@/components/Home'
 //@ts-ignore
 import Login from '@/components/Login'
 //@ts-ignore
-import Board from '@/components/Board'
+import SingleBoard from '@/components/SingleBoard'
 
 Vue.use(Router)
 
@@ -22,9 +22,9 @@ export default new Router({
       component: Login
     },
     {
-      path: '/boards/:boardid/lists',
+      path: '/boards/:boardId/lists',
       name: 'Board',
-      component: Board
+      component: SingleBoard
     }
   ]
 })

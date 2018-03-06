@@ -21,7 +21,8 @@ export default new vuex.Store({
     state: {
         user: {},
         boards: [],
-        activeBoard: {}
+        activeBoard: {},
+        activeLists: []
     },
     mutations: {
         setUser(state, payload){
@@ -29,6 +30,12 @@ export default new vuex.Store({
         },
         setBoards(state, payload){
             state.boards = payload
+        },
+        setActiveBoard(state, payload){
+            state.activeBoard = payload
+        },
+        setActiveLists(state, payload){
+            state.activeLists = payload
         }
     },
     actions: {
@@ -103,6 +110,29 @@ export default new vuex.Store({
                 .delete('boards/' + payload._id)
                 .then(res => {
                     dispatch('getBoards')
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        setActiveBoard({commit, dispatch}, payload){
+            commit('setActiveBoard', payload)
+        },
+        getBoardById({commit, dispatch}, payload){
+            api
+                .get('boards/' + payload)
+                .then(res => {
+                    commit('setActiveBoard', res.data)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        getLists({commit, dispatch}, payload){
+            api
+                .get('boards/' + payload + '/lists')
+                .then(res => {
+                    commit('setActiveLists', res.data)
                 })
                 .catch(err => {
                     console.error(err)
