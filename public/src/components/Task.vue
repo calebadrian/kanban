@@ -5,9 +5,10 @@
                 <input type="text" v-model="comment.body" placeholder="body">
                 <button type="submit">Submit Comment</button>
         </form>
-        <div v-for="comment in activeComments">
+        <p>{{activeComments.length}} comments</p>
+        <!-- <div v-for="comment in activeComments">
             <comment :comment="comment"></comment>
-        </div>
+        </div> -->
     </div>
 </template>
 
