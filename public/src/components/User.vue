@@ -2,12 +2,12 @@
     <div class="user">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div>
-                <a class="navbar-brand" href="#">
-                    <img src="../assets/Omeganize_logo4.jpg" width="35" height="30" class="d-inline-block align-top" alt=""> &#937;meganize
+                <a class="navbar-brand" href="#/">
+                    <img src="../assets/Omeganize_logo1.jpg" class="logo">
                 </a>
             </div>
             <div class="navbar-nav mr-auto">
-                <h3 class="nav-link">My Boards</h3>
+                <h3 class="nav-link">My &#937;meganize B&#937;ards</h3>
             </div>
             <div>
                 <img :src="user.avatar + user.name" width="50" height="50" class="d-inline-block align-top" alt="">
@@ -16,23 +16,27 @@
                 <h6 class="nav-link name">{{user.name}}</h6>
             </div>
             <div>
-                <button @click="logout" class="btn btn-info">Logout</button>
+                <button @click="logout" class="btn btn-info">L&#937;g&#937;ut</button>
+            </div>
+            <div>
+                &nbsp;
+                <img src="../assets/Omeganize_logo4.jpg" width="40" height="35">
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 boards">
                     <!-- <h2 class="myBoards">My Boards&nbsp;&nbsp;</h2> -->
-                    <button @click="form = !form" class="btn btn-info">+ Create Board</button>
+                    <button @click="form = !form" class="btn btn-info">+ Create B&#937;ard</button>
                 </div>
                 <div v-if="form == true" class="col-sm-12">
                     <form @submit.prevent="createBoard" class="form-group">
-                        <h3 class="myBoards">New Board</h3>
+                        <h3 class="myBoards">New B&#937;ard</h3>
                         <input type="text" v-model="board.name" placeholder="Name" class="form-control">
                         <textarea type="text" v-model="board.description" placeholder="Description" class="form-control"></textarea>
                         <button type="submit" class="btn btn-info create" @click="form = !form">Create</button>
                     </form>
-                </div>
+                </div> 
                 <div class="col-sm-3" v-for="board in boards">
                     <board :board="board"></board>
                 </div>
@@ -115,6 +119,10 @@
 
     .myBoards {
         font-family: Cinzel
+    }
+
+    .logo {
+        height: 15vh
     }
 
     .boards {
