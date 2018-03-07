@@ -1,6 +1,7 @@
 <template>
     <div class="task">
         <h6>{{task.description}}</h6>
+        <h6>{{task.priority}}</h6>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">

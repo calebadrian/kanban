@@ -236,6 +236,24 @@ export default new vuex.Store({
                 .catch(err => {
                     console.error(err)
                 })
+        },
+        sortTasks({commit, dispatch}, payload){
+            var map = ['high', 'medium', 'low']
+            api
+                .get('boards/' + payload.boardId + '/lists/' + payload._id + '/tasks')
+                .then(res => {
+                    var newActiveTasks = map.map(elem => {
+                        return res.data.find(obj => {
+                            return obj.priority === elem
+                        })
+                    })
+                    for (var i = 0; i < newActiveTasks.length; i++){
+                        if (newActiveTasks[i] == undefined){
+                            newActiveTasks.splice(i, 1)
+                        }
+                    }
+                    commit('setActiveTasks', {listId: payload._id, activeTasks: newActiveTasks})
+                })
         }
 
     }
