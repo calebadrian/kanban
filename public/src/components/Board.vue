@@ -60,7 +60,10 @@
         transition: linear .3s all;
         margin-top: 15px;
         margin-bottom: -15px;
-        color: grey
+        color: grey;
+        width: 100%;
+        overflow-wrap: break-word;
+        white-space: normal
     }
 
     .btn-link:hover {

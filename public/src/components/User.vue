@@ -4,20 +4,17 @@
             <a class="navbar-brand" href="#">
                 <img src="../assets/Omeganize_logo4.jpg" width="35" height="30" class="d-inline-block align-top" alt=""> &#937;meganize
             </a>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <img :src="user.avatar" width="60" height="50" class="d-inline-block align-top" alt="">
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link">{{user.name}}</a>
-                </li>
-            </ul>
+            <div class="navbar-nav mr-auto">
+                <h3 class="nav-link">My Boards</h3>
+            </div>
+            <img :src="user.avatar + user.name" width="60" height="50" class="d-inline-block align-top" alt="">
+            <h6 class="nav-link">{{user.name}}</h6>
             <button @click="logout" class="btn btn-info">Logout</button>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 boards">
-                    <h2 class="myBoards">My Boards&nbsp;&nbsp;</h2>
+                    <!-- <h2 class="myBoards">My Boards&nbsp;&nbsp;</h2> -->
                     <button @click="form = !form" class="btn btn-info">+ Create Board</button>
                 </div>
                 <div v-if="form == true" class="col-sm-12">
@@ -79,7 +76,6 @@
 
 
 <style scoped>
-    
     .navbar {
         background-color: black;
         font-family: Cinzel;

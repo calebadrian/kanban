@@ -4,11 +4,10 @@
             <a class="navbar-brand" href="/#/">
                 <img src="../assets/Omeganize_logo4.jpg" width="35" height="30" class="d-inline-block align-top" alt=""> &#937;meganize
             </a>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+            <div class="navbar-nav mr-auto">
                     <h3 class="nav-link" v-if="activeBoard[0]">{{activeBoard[0].name}}</h3>
-                </li>
-            </ul>
+                </div>
+            <img :src="user.avatar + user.name" width="60" height="50" class="d-inline-block align-top" alt="">            
             <h6 class="nav-link">{{user.name}}</h6>
             <button @click="logout" class="btn btn-info">Logout</button>
         </nav>
