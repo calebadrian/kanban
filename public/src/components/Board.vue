@@ -40,14 +40,14 @@
 
 <style scoped>
     .card {
-        background-color: rgba(154, 169, 175, 0.8);
+        background-color: rgba(177, 192, 197, 0.6);
         box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
         border: rgb(167, 169, 180) solid .5px
     }
 
     .title {
         font-family: Cinzel;
-        color: rgb(150, 71, 170);
+        color: indigo;
         transition: linear .3s all;
         text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
     }
@@ -57,18 +57,23 @@
         color:rgb(40, 142, 158);
     }
 
+    .btn {
+        font-family: Cinzel
+    }
+
     .btn-link {
         transition: linear .3s all;
         margin-top: 15px;
         margin-bottom: -15px;
         color: grey;
-        width: 100%;
+        width: 75%;
         overflow-wrap: break-word;
-        white-space: normal
+        white-space: normal;
+        font-size: 75%
     }
 
     .btn-link:hover {
         transition: linear .3s all;
-        color: rgb(253, 71, 71)
+        color: rgb(253, 71, 71);
     }
 </style>

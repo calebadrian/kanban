@@ -1,42 +1,52 @@
 <template>
     <div class="list">
-        <h4>{{list.name}}</h4>
-        <h5>{{activeTasks.length}}</h5>
-        <button class="btn-danger" @click="removeList(list)">Remove {{list.name}}</button>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                Sort By
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
-                <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
-            </div>
-        </div>
-        <button @click="taskFormHidden = !taskFormHidden">Add Task</button>
-        <form @submit.prevent="createTask(list)" v-if="!taskFormHidden">
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <input type="text" v-model="task.description" placeholder="description">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="title">{{list.name}}</h4>
+                <p class="text-muted">Tasks: {{activeTasks.length}}</p>
+                <div class="buttons">
+                    <div class="dropdown wide" v-if="activeTasks.length !=0">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            S&#937;rt By
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
+                            <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
+                        </div>
+                    </div>
+                    <button @click="taskFormHidden = !taskFormHidden" class="btn btn-info wide">Add Task</button>
                 </div>
-                <div class="col-sm-12">
-                    <input type="radio" id="high" value="high" v-model="task.priority">
-                    <label for="high">
-                        High Priority
-                    </label>
+                <form @submit.prevent="createTask(list)" v-if="!taskFormHidden">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" v-model="task.description" placeholder="Task Name" class="form-control">
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="radio" id="high" value="high" v-model="task.priority" class="form-check-input">
+                            <label for="high">
+                                High Priority
+                            </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="radio" id="medium" value="medium" v-model="task.priority" class="form-check-input" checked>
+                            <label for="medium">
+                                Medium Priority
+                            </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="radio" id="low" value="low" v-model="task.priority" class="form-check-input">
+                            <label for="low">
+                                Low Priority
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info create">Submit Task</button>
+                </form>
+                <div v-for="task in activeTasks">
+                    <task :task="task"></task>
                 </div>
-                <div class="col-sm-12">
-                    <input type="radio" id="medium" value="medium" v-model="task.priority" checked>
-                    <label for="medium">
-                        Medium Priority
-                    </label>
-                </div>
-                <div class="col-sm-12">
-                    <input type="radio" id="low" value="low" v-model="task.priority">
-                    <label for="low">
-                        Low Priority
-                    </label>
-                </div>
+                <button class="btn btn-link" @click="removeList(list)">Delete List</button>
             </div>
             <button type="submit">Submit Task</button>
         </form>
@@ -99,5 +109,51 @@
     }
 </script>
 
-<style>
+<style scoped>
+    .card {
+        background-color: rgba(177, 192, 197, 0.6);
+        box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
+        border: rgb(167, 169, 180) solid .5px
+    }
+
+    .title {
+        font-family: Cinzel;
+        color: indigo;
+        transition: linear .3s all;
+        text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
+    }
+
+    .dropdown-item {
+        cursor: pointer;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around
+    }
+
+    .wide {
+        width: 100%
+    }
+
+    .btn {
+        font-family: Cinzel
+    }
+
+    .btn-link {
+        transition: linear .3s all;
+        margin-top: 15px;
+        margin-bottom: -15px;
+        color: grey;
+        width: 50%;
+        overflow-wrap: break-word;
+        white-space: normal;
+        font-size: 75%
+    }
+
+    .btn-link:hover {
+        transition: linear .3s all;
+        color: rgb(253, 71, 71)
+    }
 </style>

@@ -10,7 +10,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <div v-for="list in activeLists">
-                    <p class="dropdown-item" @click=moveTask(list)>{{list.name}}</p>
+                    <p class="dropdown-item point" @click=moveTask(list)>{{list.name}}</p>
                 </div>
             </div>
         </div>
@@ -90,5 +90,8 @@
     }
 </script>
 
-<style>
+<style scoped>
+    .point {
+        cursor: pointer
+    }
 </style>
