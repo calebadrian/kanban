@@ -31,6 +31,7 @@
                 </div>
                 <div v-if="form == true" class="col-sm-12">
                     <form @submit.prevent="createList" class="form-group">
+                        <h3 class="newList">New List</h3>
                         <input type="text" v-model="list.name" placeholder="List Name" class="form-control">
                         <button type="submit" @click="form = !form" class="btn btn-info create">Submit List</button>
                     </form>
@@ -161,6 +162,10 @@
         flex-direction: column;
         justify-content: center;
         align-items: center
+    }
+
+    .newList {
+        font-family: Cinzel  
     }
 
     .form-control {

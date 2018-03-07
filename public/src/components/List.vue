@@ -5,10 +5,10 @@
                 <h4 class="title">{{list.name}}</h4>
                 <p class="text-muted">Tasks: {{activeTasks.length}}</p>
                 <div class="buttons">
-                    <div class="dropdown wide">
+                    <div class="dropdown wide" v-if="activeTasks.length !=0">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                            Sort By
+                            S&#937;rt By
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
@@ -128,14 +128,19 @@
         width: 100%
     }
 
+    .btn {
+        font-family: Cinzel
+    }
+
     .btn-link {
         transition: linear .3s all;
         margin-top: 15px;
         margin-bottom: -15px;
         color: grey;
-        width: 100%;
+        width: 50%;
         overflow-wrap: break-word;
-        white-space: normal
+        white-space: normal;
+        font-size: 75%
     }
 
     .btn-link:hover {

@@ -57,18 +57,23 @@
         color:rgb(40, 142, 158);
     }
 
+    .btn {
+        font-family: Cinzel
+    }
+
     .btn-link {
         transition: linear .3s all;
         margin-top: 15px;
         margin-bottom: -15px;
         color: grey;
-        width: 100%;
+        width: 75%;
         overflow-wrap: break-word;
-        white-space: normal
+        white-space: normal;
+        font-size: 75%
     }
 
     .btn-link:hover {
         transition: linear .3s all;
-        color: rgb(253, 71, 71)
+        color: rgb(253, 71, 71);
     }
 </style>
