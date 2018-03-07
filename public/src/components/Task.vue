@@ -1,31 +1,38 @@
 <template>
     <div class="task">
-        <h6>{{task.description}}</h6>
-        <h6>{{task.priority}}</h6>
-        <button class="btn-danger" @click="removeTask(task)">Remove {{task.description}}</button>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                Move To
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <div v-for="list in activeLists">
-                    <p class="dropdown-item point" @click=moveTask(list)>{{list.name}}</p>
+        <div class="card">
+            <div class="card-body">
+                <div class="flex">
+                    <h5 class="title">{{task.description}}</h5>
+                    <h6>Priority: {{task.priority}}</h6>
+                </div>
+                <div class="flex">
+                    <button @click="commentFormHidden = !commentFormHidden" class="btn btn-info">Add Comment</button>
+                    <form @submit.prevent="createComment" v-if="!commentFormHidden">
+                        <input type="text" v-model="comment.body" placeholder="body">
+                        <button type="submit" class="btn btn-info">Submit Comment</button>
+                    </form>
+                    <button data-toggle="modal" data-target='#exampleModal' class="btn btn-secondary">View Task</button>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Move To
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div v-for="list in activeLists">
+                            <p class="dropdown-item point" @click=moveTask(list)>{{list.name}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <button @click="commentFormHidden = !commentFormHidden">Add Comment</button>
-        <form @submit.prevent="createComment" v-if="!commentFormHidden">
-            <input type="text" v-model="comment.body" placeholder="body">
-            <button type="submit">Submit Comment</button>
-        </form>
-        <button data-toggle="modal" data-target='#exampleModal'>{{activeComments.length}} comments</button>
         <div class="modal fade settings-modal color-black" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{task.description}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -34,6 +41,7 @@
                         <div v-for="comment in activeComments">
                             <comment :comment="comment"></comment>
                         </div>
+                        <button class="btn btn-link" @click="removeTask(task)">Remove {{task.description}}</button>
                     </div>
                 </div>
             </div>
@@ -92,5 +100,52 @@
 <style scoped>
     .point {
         cursor: pointer
+    }
+
+    .card {
+        background-color: rgba(140, 193, 211, 0.3);
+        box-shadow: inset 0px 0px 5px rgba(50, 50, 50, 1);
+        border: rgb(167, 169, 180) solid .5px;
+        margin-top: 5px;
+    }
+
+    .flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between
+    }
+
+    .dropdown {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 5px
+    }
+
+    .title {
+        font-family: Cinzel;
+        color: indigo;
+        transition: linear .3s all;
+        text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
+    }
+
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn-link {
+        transition: linear .3s all;
+        margin-top: 15px;
+        margin-bottom: -15px;
+        color: grey;
+        width: 100%;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+
+    .btn-link:hover {
+        transition: linear .3s all;
+        color: rgb(253, 71, 71);
     }
 </style>

@@ -71,8 +71,7 @@
     .logo {
         opacity: .7;
         border-radius: 30px;
-        margin: 15px;
-
+        margin-top: 20vh;
     }
 
     .form-group {
