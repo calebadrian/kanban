@@ -52,12 +52,17 @@
                 </div>
                 <button class="btn btn-link" @click="removeList(list)">Delete List</button>
             </div>
+            <button type="submit">Submit Task</button>
+        </form>
+        <div v-for="task in activeTasks">
+            <task :task="task" draggable="true" @dragstart="drag(event)"></task>
         </div>
     </div>
 </template>
 
 <script>
     import Task from './Task'
+    import draggable from 'vuedraggable'
     export default {
         name: "List",
         props: ['list'],
@@ -68,9 +73,9 @@
             return {
                 task: {
                     description: '',
-                    priority: ''
+                    priority: 'medium'
                 },
-                taskFormHidden: true
+                taskFormHidden: true,
             }
         },
         methods: {
@@ -91,6 +96,9 @@
             },
             removeList(list) {
                 this.$store.dispatch('removeList', list)
+            },
+            drag(event){
+                console.log('hi')
             }
         },
         computed: {
@@ -99,7 +107,8 @@
             }
         },
         components: {
-            Task
+            Task,
+            draggable
         }
     }
 </script>
