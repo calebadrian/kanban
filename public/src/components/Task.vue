@@ -14,23 +14,24 @@
                 </div>
             </div>
         </div>
-        <button @click="commentFormHidden = !commentFormHidden">Add Comment</button>
-        <form @submit.prevent="createComment" v-if="!commentFormHidden">
-            <input type="text" v-model="comment.body" placeholder="body">
-            <button type="submit">Submit Comment</button>
-        </form>
-        <button data-toggle="modal" data-target='#exampleModal'>{{activeComments.length}} comments</button>
-        <div class="modal fade settings-modal color-black" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <button data-toggle="modal" :data-target="'#' + task._id">{{activeComments.length}} comments</button>
+        <div class="modal fade settings-modal color-black" :id="task._id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Comments for: {{task.description}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body text-center">
+                        <form @submit.prevent="createComment">
+                            <div class="form-group">
+                                <input type="text" v-model="comment.body" placeholder="body">
+                                <button class="btn-success" type="submit">Submit Comment</button>
+                            </div>
+                        </form>
                         <div v-for="comment in activeComments">
                             <comment :comment="comment"></comment>
                         </div>

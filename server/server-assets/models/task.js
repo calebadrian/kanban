@@ -11,7 +11,7 @@ var schema = new Schema({
     listId: {type: ObjectId, ref: 'List'},
     boardId: {type: ObjectId, ref: 'Board'},    
     description: {type: String},
-    priority: {type: String, enum: priorities, default: priorities[1]}
+    priority: {type: String, enum: priorities}
 })
 
 schema.pre('remove', function(next) {
