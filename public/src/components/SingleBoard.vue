@@ -86,6 +86,12 @@
 </script>
 
 <style scoped>
+    .singleBoard {
+        background-color: #ffffff;
+        background-image: url("https://www.transparenttextures.com/patterns/rocky-wall.png");
+        min-height: 100vh
+    }
+
     .navbar {
         background-color: black;
         font-family: Cinzel;
@@ -94,7 +100,8 @@
 
     .nav-link {
         color: #36afc2 !important;
-        margin-top: 1%
+        margin-top: 1%;
+        text-shadow: 2px 1px 10px rgb(150, 150, 150);
     }
 
     .navbar-brand {

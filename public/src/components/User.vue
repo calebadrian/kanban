@@ -36,7 +36,7 @@
                         <textarea type="text" v-model="board.description" placeholder="Description" class="form-control"></textarea>
                         <button type="submit" class="btn btn-info create" @click="form = !form">Create</button>
                     </form>
-                </div> 
+                </div>
                 <div class="col-sm-3" v-for="board in boards">
                     <board :board="board"></board>
                 </div>
@@ -88,6 +88,12 @@
 
 
 <style scoped>
+    .user {
+        background-color: #ffffff;
+        background-image: url("https://www.transparenttextures.com/patterns/rocky-wall.png");
+        min-height: 100vh
+    }
+
     nav {
         display: flex;
         flex-direction: row;
@@ -102,7 +108,8 @@
 
     .nav-link {
         color: #36afc2 !important;
-        margin-top: 1%
+        margin-top: 1%;
+        text-shadow: 2px 1px 10px rgb(150, 150, 150);
     }
 
     .navbar-brand {
