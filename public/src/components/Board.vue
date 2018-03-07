@@ -40,20 +40,21 @@
 
 <style scoped>
     .card {
-        background-color: rgba(151, 183, 197, 0.5);
+        background-color: rgba(154, 169, 175, 0.8);
         box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
         border: rgb(167, 169, 180) solid .5px
     }
 
     .title {
         font-family: Cinzel;
-        color:rgb(24, 133, 141);
+        color: rgb(150, 71, 170);
         transition: linear .3s all;
+        text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
     }
 
     .title:hover {
         transition: linear .3s all;
-        color:rgb(7, 164, 179);
+        color:rgb(40, 142, 158);
     }
 
     .btn-link {
@@ -70,6 +71,4 @@
         transition: linear .3s all;
         color: rgb(253, 71, 71)
     }
-
-
 </style>
