@@ -87,6 +87,7 @@ router.put("/api/boards/:boardid/lists/:listid", (req, res, next) => {
 router.put("/api/boards/:boardid/lists/:listid/tasks/:taskid", (req, res, next) => {
     Tasks.findByIdAndUpdate(req.params.taskid, req.body, {new: true})
         .then(task => {
+            task.save()
             return res.send(task)
         })
         .catch(next)
