@@ -4,42 +4,44 @@
             <div class="card-body">
                 <h4 class="title">{{list.name}}</h4>
                 <p class="text-muted">Tasks: {{activeTasks.length}}</p>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Sort By
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
-                        <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
+                <div class="buttons">
+                    <div class="dropdown wide">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Sort By
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
+                            <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
+                        </div>
                     </div>
+                    <button @click="taskFormHidden = !taskFormHidden" class="btn btn-info wide">Add Task</button>
                 </div>
-                <button @click="taskFormHidden = !taskFormHidden">Add Task</button>
                 <form @submit.prevent="createTask(list)" v-if="!taskFormHidden">
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <input type="text" v-model="task.description" placeholder="description">
+                            <input type="text" v-model="task.description" placeholder="Task Name" class="form-control">
                         </div>
                         <div class="col-sm-12">
-                            <input type="radio" id="high" value="high" v-model="task.priority">
+                            <input type="radio" id="high" value="high" v-model="task.priority" class="form-check-input">
                             <label for="high">
                                 High Priority
                             </label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="radio" id="medium" value="medium" v-model="task.priority" checked>
+                            <input type="radio" id="medium" value="medium" v-model="task.priority" class="form-check-input" checked>
                             <label for="medium">
                                 Medium Priority
                             </label>
                         </div>
                         <div class="col-sm-12">
-                            <input type="radio" id="low" value="low" v-model="task.priority">
+                            <input type="radio" id="low" value="low" v-model="task.priority" class="form-check-input">
                             <label for="low">
                                 Low Priority
                             </label>
                         </div>
                     </div>
-                    <button type="submit">Submit Task</button>
+                    <button type="submit" class="btn btn-info create">Submit Task</button>
                 </form>
                 <div v-for="task in activeTasks">
                     <task :task="task"></task>
@@ -114,6 +116,16 @@
 
     .dropdown-item {
         cursor: pointer;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around
+    }
+
+    .wide {
+        width: 100%
     }
 
     .btn-link {
