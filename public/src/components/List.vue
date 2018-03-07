@@ -48,10 +48,6 @@
                 </div>
                 <button class="btn btn-link" @click="removeList(list)">Delete List</button>
             </div>
-            <button type="submit">Submit Task</button>
-        </form>
-        <div v-for="task in activeTasks">
-            <task :task="task" draggable="true" @dragstart="drag(event)"></task>
         </div>
     </div>
 </template>
@@ -93,7 +89,7 @@
             removeList(list) {
                 this.$store.dispatch('removeList', list)
             },
-            drag(event){
+            drag(event) {
                 console.log('hi')
             }
         },
