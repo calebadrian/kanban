@@ -1,15 +1,23 @@
 <template>
     <div class="singleBoard">
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="/#/">
-                <img src="../assets/Omeganize_logo4.jpg" width="35" height="30" class="d-inline-block align-top" alt=""> &#937;meganize
-            </a>
+            <div>
+                <a class="navbar-brand" href="/#/">
+                    <img src="../assets/Omeganize_logo4.jpg" width="35" height="30" class="d-inline-block align-top" alt=""> &#937;meganize
+                </a>
+            </div>
             <div class="navbar-nav mr-auto">
-                    <h3 class="nav-link" v-if="activeBoard[0]">{{activeBoard[0].name}}</h3>
-                </div>
-            <img :src="user.avatar + user.name" width="60" height="50" class="d-inline-block align-top" alt="">            
-            <h6 class="nav-link">{{user.name}}</h6>
-            <button @click="logout" class="btn btn-info">Logout</button>
+                <h3 class="nav-link" v-if="activeBoard[0]">{{activeBoard[0].name}}</h3>
+            </div>
+            <div>
+                <img :src="user.avatar + user.name" width="50" height="50" class="d-inline-block align-top" alt="">
+            </div>
+            <div>
+                <h6 class="nav-link name">{{user.name}}</h6>
+            </div>
+            <div>
+                <button @click="logout" class="btn btn-info">Logout</button>
+            </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
@@ -82,9 +90,14 @@
 
     .nav-link {
         color: #36afc2 !important;
+        margin-top: 1%
     }
 
     .navbar-brand {
         color: #36afc2 !important;
+    }
+
+    .name {
+        margin-top: 15%
     }
 </style>
