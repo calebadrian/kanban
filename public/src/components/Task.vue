@@ -27,21 +27,13 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="modal fade settings-modal color-black" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-=======
         <button data-toggle="modal" :data-target="'#' + task._id">{{activeComments.length}} comments</button>
         <div class="modal fade settings-modal color-black" :id="task._id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
->>>>>>> 8773aa9ebe0203690f9bf02af6fd75c42c472be3
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-<<<<<<< HEAD
-                        <h5 class="modal-title" id="exampleModalLabel">{{task.description}}</h5>
-=======
                         <h5 class="modal-title" id="exampleModalLabel">Comments for: {{task.description}}</h5>
->>>>>>> 8773aa9ebe0203690f9bf02af6fd75c42c472be3
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
