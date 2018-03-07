@@ -5,7 +5,7 @@
                 <h4 class="title">{{list.name}}</h4>
                 <p class="text-muted">Tasks: {{activeTasks.length}}</p>
                 <div class="buttons">
-                    <div class="dropdown wide" v-if="activeTasks.length !=0">
+                    <div class="dropdown wide" v-if="activeTasks.length >1">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             S&#937;rt By
@@ -20,25 +20,29 @@
                 <form @submit.prevent="createTask(list)" v-if="!taskFormHidden">
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <input type="text" v-model="task.description" placeholder="Task Name" class="form-control">
+                            <input type="text" v-model="task.description" placeholder="Task Name" class="form-control text-mar">
                         </div>
-                        <div class="col-sm-12">
-                            <input type="radio" id="high" value="high" v-model="task.priority" class="form-check-input">
-                            <label for="high">
-                                High Priority
-                            </label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="radio" id="medium" value="medium" v-model="task.priority" class="form-check-input" checked>
-                            <label for="medium">
-                                Medium Priority
-                            </label>
-                        </div>
-                        <div class="col-sm-12">
-                            <input type="radio" id="low" value="low" v-model="task.priority" class="form-check-input">
-                            <label for="low">
-                                Low Priority
-                            </label>
+                        <div class="flex col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <input type="radio" id="high" value="high" v-model="task.priority" class="form-check-input">
+                                    <label for="high">
+                                        High Priority
+                                    </label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="radio" id="medium" value="medium" v-model="task.priority" class="form-check-input" checked>
+                                    <label for="medium">
+                                        Medium Priority
+                                    </label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="radio" id="low" value="low" v-model="task.priority" class="form-check-input">
+                                    <label for="low">
+                                        Low Priority
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-info create">Submit Task</button>
@@ -119,6 +123,10 @@
         text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
     }
 
+    .text-mar {
+        margin-top: 5px
+    }
+
     .dropdown-item {
         cursor: pointer;
     }
@@ -135,6 +143,13 @@
 
     .btn {
         font-family: Cinzel
+    }
+
+    .flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
     }
 
     .btn-link {
