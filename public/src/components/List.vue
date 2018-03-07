@@ -1,47 +1,51 @@
 <template>
     <div class="list">
-        <h4>{{list.name}}</h4>
-        <h5>{{activeTasks.length}}</h5>
-        <button class="btn-danger" @click="removeList(list)">Remove {{list.name}}</button>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                Sort By
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
-                <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="title">{{list.name}}</h4>
+                <p class="text-muted">Tasks: {{activeTasks.length}}</p>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Sort By
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
+                        <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
+                    </div>
+                </div>
+                <button @click="taskFormHidden = !taskFormHidden">Add Task</button>
+                <form @submit.prevent="createTask(list)" v-if="!taskFormHidden">
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <input type="text" v-model="task.description" placeholder="description">
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="radio" id="high" value="high" v-model="task.priority">
+                            <label for="high">
+                                High Priority
+                            </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="radio" id="medium" value="medium" v-model="task.priority" checked>
+                            <label for="medium">
+                                Medium Priority
+                            </label>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="radio" id="low" value="low" v-model="task.priority">
+                            <label for="low">
+                                Low Priority
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit">Submit Task</button>
+                </form>
+                <div v-for="task in activeTasks">
+                    <task :task="task"></task>
+                </div>
+                <button class="btn btn-link" @click="removeList(list)">Delete List</button>
             </div>
-        </div>
-        <button @click="taskFormHidden = !taskFormHidden">Add Task</button>
-        <form @submit.prevent="createTask(list)" v-if="!taskFormHidden">
-            <div class="form-group row">
-                <div class="col-sm-12">
-                    <input type="text" v-model="task.description" placeholder="description">
-                </div>
-                <div class="col-sm-12">
-                    <input type="radio" id="high" value="high" v-model="task.priority">
-                    <label for="high">
-                        High Priority
-                    </label>
-                </div>
-                <div class="col-sm-12">
-                    <input type="radio" id="medium" value="medium" v-model="task.priority" checked>
-                    <label for="medium">
-                        Medium Priority
-                    </label>
-                </div>
-                <div class="col-sm-12">
-                    <input type="radio" id="low" value="low" v-model="task.priority">
-                    <label for="low">
-                        Low Priority
-                    </label>
-                </div>
-            </div>
-            <button type="submit">Submit Task</button>
-        </form>
-        <div v-for="task in activeTasks">
-            <task :task="task"></task>
         </div>
     </div>
 </template>
@@ -73,13 +77,13 @@
             },
             sortTasksHigh(list) {
                 var map = ['high', 'medium', 'low']
-                this.$store.dispatch('sortTasks', {list: list, map: map})
+                this.$store.dispatch('sortTasks', { list: list, map: map })
             },
             sortTasksLow(list) {
                 var map = ['low', 'medium', 'high']
-                this.$store.dispatch('sortTasks', {list: list, map: map})
+                this.$store.dispatch('sortTasks', { list: list, map: map })
             },
-            removeList(list){
+            removeList(list) {
                 this.$store.dispatch('removeList', list)
             }
         },
@@ -94,5 +98,36 @@
     }
 </script>
 
-<style>
+<style scoped>
+    .card {
+        background-color: rgba(177, 192, 197, 0.6);
+        box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
+        border: rgb(167, 169, 180) solid .5px
+    }
+
+    .title {
+        font-family: Cinzel;
+        color: indigo;
+        transition: linear .3s all;
+        text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
+    }
+
+    .dropdown-item {
+        cursor: pointer;
+    }
+
+    .btn-link {
+        transition: linear .3s all;
+        margin-top: 15px;
+        margin-bottom: -15px;
+        color: grey;
+        width: 100%;
+        overflow-wrap: break-word;
+        white-space: normal
+    }
+
+    .btn-link:hover {
+        transition: linear .3s all;
+        color: rgb(253, 71, 71)
+    }
 </style>

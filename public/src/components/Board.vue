@@ -40,14 +40,14 @@
 
 <style scoped>
     .card {
-        background-color: rgba(154, 169, 175, 0.8);
+        background-color: rgba(177, 192, 197, 0.6);
         box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
         border: rgb(167, 169, 180) solid .5px
     }
 
     .title {
         font-family: Cinzel;
-        color: rgb(150, 71, 170);
+        color: indigo;
         transition: linear .3s all;
         text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
     }

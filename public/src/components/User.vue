@@ -26,7 +26,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 boards">
-                    <!-- <h2 class="myBoards">My Boards&nbsp;&nbsp;</h2> -->
                     <button @click="form = !form" class="btn btn-info">+ Create B&#937;ard</button>
                 </div>
                 <div v-if="form == true" class="col-sm-12">

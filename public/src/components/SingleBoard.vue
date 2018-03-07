@@ -25,13 +25,23 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-12">
-                    <div v-if="activeBoard[0]">
-                        <h5>{{activeBoard[0].description}}</h5>
-                        <form @submit.prevent="createList">
-                            <input type="text" v-model="list.name" placeholder="name">
-                            <button type="submit">Submit List</button>
-                        </form>
+                <div class="col-sm-12 lists">
+                    <button @click="form = !form" class="btn btn-info">+ Create List</button>
+                    <button @click="deets = !deets" class="btn btn-info">B&#937;ard Details</button>
+                </div>
+                <div v-if="form == true" class="col-sm-12">
+                    <form @submit.prevent="createList" class="form-group">
+                        <input type="text" v-model="list.name" placeholder="List Name" class="form-control">
+                        <button type="submit" @click="form = !form" class="btn btn-info create">Submit List</button>
+                    </form>
+                </div>
+                <div class="col-sm-12 flex">
+                    <div class="row">
+                        <div v-if="deets == true" class="card">
+                            <div class="card-body">
+                                <h5>{{activeBoard[0].description}}</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-3" v-for="list in activeLists">
@@ -52,6 +62,8 @@
         },
         data() {
             return {
+                form: false,
+                deets: false,
                 list: {
                     name: ''
                 }
@@ -112,7 +124,51 @@
         height: 15vh
     }
 
+    .flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center
+    }
+
+    .lists {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+        margin-bottom: 5px
+    }
+
     .name {
         margin-top: 15%
+    }
+
+    .card {
+        background-color: rgba(177, 192, 197, 0.6);
+        box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
+        border: rgb(167, 169, 180) solid .5px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        font-family: Cinzel
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center
+    }
+
+    .form-control {
+        width: 50%;
+        margin: 5px
+    }
+
+    .create {
+        width: 20%
     }
 </style>
