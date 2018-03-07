@@ -11,7 +11,7 @@ var schema = new Schema({
     boardId: {type: ObjectId, ref: 'Board'}
 })
 
-schema.pre('findByIdAndRemove', function(next) {
+schema.pre('remove', function(next) {
     Tasks.remove({listId: this._id}).exec()
     Comments.remove({listId: this._id}).exec()
     next()

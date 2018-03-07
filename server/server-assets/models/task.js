@@ -14,8 +14,19 @@ var schema = new Schema({
     priority: {type: String, enum: priorities, default: priorities[1]}
 })
 
-schema.pre('findByIdAndRemove', function(next) {
+schema.pre('remove', function(next) {
     Comments.remove({taskId: this._id}).exec()
+    next()
+})
+
+schema.pre('save', function(next) {
+    Comments.find({taskId: this._id})
+    .then(res => {
+        for (var i = 0; i < res.length; i++){
+            res[i].listId = this.listId
+            res[i].save()
+        }
+    })
     next()
 })
 

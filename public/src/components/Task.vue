@@ -17,7 +17,25 @@
             <input type="text" v-model="comment.body" placeholder="body">
             <button type="submit">Submit Comment</button>
         </form>
-        <p>{{activeComments.length}} comments</p>
+        <button data-toggle="modal" data-target='#exampleModal'>{{activeComments.length}} comments</button>
+        <div class="modal fade settings-modal color-black" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div v-for="comment in activeComments">
+                            <comment :comment="comment"></comment>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- <div v-for="comment in activeComments">
             <comment :comment="comment"></comment>
         </div> -->
@@ -56,8 +74,8 @@
                 this.comment.boardId = this.task.boardId
                 this.$store.dispatch('addComment', this.comment)
             },
-            moveTask(list){
-                this.$store.dispatch('setTask', {list: list, task: this.task})
+            moveTask(list) {
+                this.$store.dispatch('setTask', { list: list, task: this.task })
             }
         },
         components: {
