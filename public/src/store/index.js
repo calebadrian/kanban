@@ -156,6 +156,16 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
+        removeList({commit, dispatch}, payload){
+            api
+                .delete('boards/' + payload.boardId + '/lists/' + payload._id)
+                .then(res => {
+                    dispatch('getLists', payload.boardId)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
         getTasks({commit, dispatch}, payload){
             api
                 .get('boards/' + payload.boardId + '/lists/' + payload._id + '/tasks')
@@ -171,6 +181,16 @@ export default new vuex.Store({
                 .post('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks', payload)
                 .then(res => {
                     dispatch('getTasksAfterAdd', payload)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        removeTask({commit, dispatch}, payload){
+            api
+                .delete('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload._id)
+                .then(res => {
+                    dispatch('getTasks', {boardId: payload.boardId, _id: payload.listId})
                 })
                 .catch(err => {
                     console.error(err)
@@ -238,11 +258,10 @@ export default new vuex.Store({
                 })
         },
         sortTasks({commit, dispatch}, payload){
-            var map = ['high', 'medium', 'low']
             api
-                .get('boards/' + payload.boardId + '/lists/' + payload._id + '/tasks')
+                .get('boards/' + payload.list.boardId + '/lists/' + payload.list._id + '/tasks')
                 .then(res => {
-                    var newActiveTasks = map.map(elem => {
+                    var newActiveTasks = payload.map.map(elem => {
                         return res.data.find(obj => {
                             return obj.priority === elem
                         })
@@ -252,7 +271,7 @@ export default new vuex.Store({
                             newActiveTasks.splice(i, 1)
                         }
                     }
-                    commit('setActiveTasks', {listId: payload._id, activeTasks: newActiveTasks})
+                    commit('setActiveTasks', {listId: payload.list._id, activeTasks: newActiveTasks})
                 })
         }
 

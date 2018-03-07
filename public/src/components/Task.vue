@@ -2,6 +2,7 @@
     <div class="task">
         <h6>{{task.description}}</h6>
         <h6>{{task.priority}}</h6>
+        <button class="btn-danger" @click="removeTask(task)">Remove {{task.description}}</button>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
@@ -77,6 +78,9 @@
             },
             moveTask(list) {
                 this.$store.dispatch('setTask', { list: list, task: this.task })
+            },
+            removeTask(task) {
+                this.$store.dispatch('removeTask', task)
             }
         },
         components: {

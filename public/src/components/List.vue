@@ -2,7 +2,17 @@
     <div class="list">
         <h4>{{list.name}}</h4>
         <h5>{{activeTasks.length}}</h5>
-        <button @click="sortTasks(list)">Sort Tasks</button>
+        <button class="btn-danger" @click="removeList(list)">Remove {{list.name}}</button>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Sort By
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
+                <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
+            </div>
+        </div>
         <button @click="taskFormHidden = !taskFormHidden">Add Task</button>
         <form @submit.prevent="createTask(list)" v-if="!taskFormHidden">
             <div class="form-group row">
@@ -61,8 +71,16 @@
                 this.task.boardId = this.$store.state.activeBoard[0]._id
                 this.$store.dispatch('addTask', this.task)
             },
-            sortTasks(list) {
-                this.$store.dispatch('sortTasks', list)
+            sortTasksHigh(list) {
+                var map = ['high', 'medium', 'low']
+                this.$store.dispatch('sortTasks', {list: list, map: map})
+            },
+            sortTasksLow(list) {
+                var map = ['low', 'medium', 'high']
+                this.$store.dispatch('sortTasks', {list: list, map: map})
+            },
+            removeList(list){
+                this.$store.dispatch('removeList', list)
             }
         },
         computed: {
