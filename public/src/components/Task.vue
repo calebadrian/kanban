@@ -4,6 +4,13 @@
             <div class="card-body">
                 <div class="flex">
                     <h5 class="title">{{task.description}}</h5>
+                    <i class="fas fa-edit" @click="form = !form"></i>
+                    <div v-if="form == true" class="col-sm-12">
+                        <form @submit.prevent="editTask(task)" class="form-group">
+                            <input type="text" v-model="task.description" placeholder="Name" class="form-control">
+                            <button type="submit" class="btn btn-info create" @click="form = !form">Edit</button>
+                        </form>
+                    </div>
                     <h6 class="text-muted">Priority: {{task.priority}}</h6>
                 </div>
                 <div class="flex">
@@ -55,7 +62,8 @@
                 comment: {
                     body: ''
                 },
-                commentFormHidden: true
+                commentFormHidden: true,
+                form: false
             }
         },
         mounted() {
@@ -83,6 +91,9 @@
             },
             removeTask(task) {
                 this.$store.dispatch('removeTask', task)
+            },
+            editTask(task){
+                this.$store.dispatch('setTaskName', task)
             },
             moving(event) {
                 event.dataTransfer.setData('text/javascript', JSON.stringify(this.task))
