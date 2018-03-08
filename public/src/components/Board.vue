@@ -2,10 +2,12 @@
     <div class="board">
         <div class="card">
             <div class="card-body">
-                <h4 class="title">
-                    <router-link :to="{name: 'Board', params: {boardId: board._id}}" class="title">{{board.name}}</router-link>
-                </h4>
-                <i class="fas fa-edit" @click="form = !form"></i>
+                <div class="d-flex justify-content-center">
+                    <h4 class="title">
+                        <router-link :to="{name: 'Board', params: {boardId: board._id}}" class="title">{{board.name}}</router-link>
+                    </h4>
+                    <i class="fas fa-edit" @click="form = !form"></i>
+                </div>
                 <div v-if="form == true" class="col-sm-12">
                     <form @submit.prevent="editBoard(board)" class="form-group">
                         <input type="text" v-model="board.name" placeholder="Name" class="form-control">
@@ -62,6 +64,7 @@
         color: indigo;
         transition: linear .3s all;
         text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
+        margin-left: 3px
     }
 
     .title:hover {
@@ -69,8 +72,25 @@
         color:rgb(40, 142, 158);
     }
 
+    .fa-edit {
+        opacity: .4;
+        transition: linear .3s all;
+        margin: 2px
+    }
+
+    .fa-edit:hover {
+        opacity: 1;
+        cursor: pointer;
+        transition: linear .3s all
+    }
+
     .btn {
         font-family: Cinzel
+    }
+
+    .btn-info {
+        width: 40%;
+        margin: 5px
     }
 
     .btn-link {
