@@ -1,8 +1,10 @@
 <template>
     <div class="comment">
-        <p>{{comment.body}}</p>
-        <button class="btn-danger" @click="removeComment(comment)">Delete Comment</button>
-        <p>{{userForComment.name}}</p>
+        <div class="comment">
+            <h5>{{userForComment.name}}:&nbsp;&nbsp;&nbsp;</h5>
+            <p>{{comment.body}}</p>
+        </div>
+        <i class="fas fa-minus-circle" @click="removeComment(comment)"></i>
     </div>
 </template>
 
@@ -10,7 +12,7 @@
     export default {
         name: 'Comment',
         props: ['comment'],
-        mounted(){
+        mounted() {
             this.$store.dispatch('getUserForComment', this.comment)
         },
         data() {
@@ -19,18 +21,35 @@
             }
         },
         methods: {
-            removeComment(comment){
+            removeComment(comment) {
                 this.$store.dispatch('removeComment', comment)
             }
         },
         computed: {
-            userForComment(){
+            userForComment() {
                 return this.$store.state.userForComment
             }
         }
     }
 </script>
 
-<style>
+<style scoped>
+    .comment {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: Cinzel
+    }
 
+    i {
+        opacity: .3;
+        transition: linear .3s all
+    }
+
+    i:hover {
+        opacity: 1;
+        cursor: pointer;
+        transition: linear .3s all;
+        color: rgb(253, 71, 71)
+    }
 </style>

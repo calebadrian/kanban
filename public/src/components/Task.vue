@@ -1,6 +1,6 @@
 <template>
     <div class="task" draggable="true" v-on:dragstart="moving">
-        <div class="card">
+        <div class="card task-card">
             <div class="card-body">
                 <div>
                     <h5 class="title">{{task.description}}</h5>
@@ -25,7 +25,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Comments for: {{task.description}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">C&#937;mments f&#937;r: {{task.description}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -34,7 +34,7 @@
                         <form @submit.prevent="createComment">
                             <div class="form-group flex">
                                 <input type="text" v-model="comment.body" placeholder="Add Comment" class="form-control">
-                                <button class="btn btn-info" type="submit">Submit Comment</button>
+                                <button class="btn btn-info" type="submit">Submit C&#937;mment</button>
                             </div>
                         </form>
                         <div class="card">
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-link" @click="removeTask(task)" data-dismiss="modal">Remove {{task.description}}</button>
+                        <button class="btn btn-link" @click="removeTask(task)" data-dismiss="modal">Rem&#937;ve {{task.description}}</button>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
 </script>
 
 <style scoped>
-    .task:hover {
+    .task-card:hover {
         cursor: -webkit-grab
     }
 
@@ -138,13 +138,24 @@
         text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
     }
 
+    .modal-title {
+        font-family: Cinzel;
+        color: ivory;
+        text-shadow: 2px 1px 10px rgb(150, 150, 150);
+    }
+
+    .modal-header {
+        background: linear-gradient(left, #7b76fe, #f355fa) !important;
+    }
+
     .modal-content {
         display: flex;
         flex-direction: column;
     }
 
     .btn {
-        height: auto
+        height: auto;
+        font-family: Cinzel
     }
 
     .btn-link {
