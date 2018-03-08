@@ -1,5 +1,5 @@
 <template>
-    <div class="task">
+    <div class="task" draggable="true" v-on:dragstart="moving" v-on:dragend="removeFromList">
         <div class="card">
             <div class="card-body">
                 <div class="flex">
@@ -7,8 +7,10 @@
                     <h6 class="text-muted">Priority: {{task.priority}}</h6>
                 </div>
                 <div class="flex">
-                    <button data-toggle="modal" :data-target="'#' + task._id" class="btn btn-info">{{activeComments.length}} <i class="far fa-comment"></i></button>
-                    <div class="dropdown">
+                    <button data-toggle="modal" :data-target="'#' + task._id" class="btn btn-info">{{activeComments.length}}
+                        <i class="far fa-comment"></i>
+                    </button>
+                    <!-- <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             Move To
@@ -18,7 +20,7 @@
                                 <p class="dropdown-item point" @click=moveTask(list)>{{list.name}}</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -90,6 +92,12 @@
             },
             removeTask(task) {
                 this.$store.dispatch('removeTask', task)
+            },
+            moving(event) {
+                event.dataTransfer.setData('text/javascript', JSON.stringify(this.task))
+            },
+            removeFromList(){
+                this.$store.dispatch('removeTask', this.task)
             }
         },
         components: {

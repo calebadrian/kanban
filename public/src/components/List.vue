@@ -1,5 +1,5 @@
 <template>
-    <div class="list">
+    <div class="list" droppable="true" v-on:drop.capture="addTask" ondragover="event.preventDefault()">
         <div class="card">
             <div class="card-body">
                 <h4 class="title">{{list.name}}</h4>
@@ -93,6 +93,17 @@
             removeList(list) {
                 this.$store.dispatch('removeList', list)
             },
+            addTask(event){
+                var task = JSON.parse(event.dataTransfer.getData('text/javascript'))
+                task.listId = this.list._id
+                var newTask = {}
+                for (var key in task){
+                    if (key != '_id'){
+                        newTask[key] = task[key]
+                    }
+                }
+                this.$store.dispatch('addTask', newTask)
+            }
         },
         computed: {
             activeTasks() {
