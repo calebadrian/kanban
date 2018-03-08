@@ -25,14 +25,16 @@
         </nav>
         <img :src="user.avatar + user.name">
         <h3>{{user.name}}</h3>
+        <form @submit.prevent="searchByEmail" class="form-group">
+            <input type="text" v-model="userFind.email" placeholder="email" class="form-control">
+            <button type="submit" class="btn btn-info create" @click="form = !form">Find User</button>
+        </form>
+        <div v-if="foundUser.name">
+            <button class="btn-success" @click="addToFriends(foundUser, user)">Add {{foundUser.name}} to Friends</button>
+        </div>
         <div v-for="friend in user.friends">
             <h3>{{friend.name}}</h3>
             <button class="btn-danger" @click="removeFromFriends(friend, user)">Remove {{friend.name}} from friends</button>
-        </div>
-        <div v-for="userToAdd in users">
-            <div v-if="userToAdd._id != user._id">
-                <button class="btn-success" @click="addToFriends(userToAdd, user)">Add {{userToAdd.name}} to Friends</button>
-            </div>
         </div>
     </div>
 </template>
@@ -40,12 +42,11 @@
 <script>
     export default {
         name: 'Profile',
-        mounted() {
-            this.$store.dispatch('getUsers')
-        },
         data() {
             return {
-
+                userFind: {
+                    email: ''
+                }
             }
         },
         computed: {
@@ -54,11 +55,17 @@
             },
             users() {
                 return this.$store.state.users
+            },
+            foundUser() {
+                return this.$store.state.foundUser
             }
         },
         methods: {
             logout() {
                 this.$store.dispatch('logout')
+            },
+            searchByEmail(){
+                this.$store.dispatch('findByEmail', this.userFind)
             },
             addToFriends(userToAdd, user) {
                 for (var i = 0; i < user.friends.length; i++) {
@@ -70,8 +77,8 @@
                 }
                 this.$store.dispatch('addToFriends', { user: user, userToAdd: userToAdd })
             },
-            removeFromFriends(friend, user){
-                this.$store.dispatch('removeFromFriends', {user: user, friend: friend})
+            removeFromFriends(friend, user) {
+                this.$store.dispatch('removeFromFriends', { user: user, friend: friend })
             }
         }
     }
