@@ -24,7 +24,8 @@ export default new vuex.Store({
         activeBoard: {},
         activeLists: [],
         activeTasks: [],
-        activeComments: []
+        activeComments: [],
+        movingTask: {}
     },
     mutations: {
         setUser(state, payload){
@@ -44,6 +45,9 @@ export default new vuex.Store({
         },
         setActiveComments(state, payload){
             vue.set(state.activeComments, payload.taskId, payload.activeComments || [])
+        },
+        setMovingTask(state, payload){
+            state.movingTask = payload
         }
     },
     actions: {
@@ -181,6 +185,7 @@ export default new vuex.Store({
                 .post('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks', payload)
                 .then(res => {
                     dispatch('getTasksAfterAdd', payload)
+                    commit('setMovingTask', res.data)
                 })
                 .catch(err => {
                     console.error(err)

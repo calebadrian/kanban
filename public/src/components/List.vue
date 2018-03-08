@@ -94,6 +94,7 @@
                 this.$store.dispatch('removeList', list)
             },
             addTask(event){
+                var comments = JSON.parse(event.dataTransfer.getData('text/javascript/comments'))
                 var task = JSON.parse(event.dataTransfer.getData('text/javascript'))
                 task.listId = this.list._id
                 var newTask = {}
@@ -103,12 +104,23 @@
                     }
                 }
                 this.$store.dispatch('addTask', newTask)
+                for (var i = 0; i < comments.length; i++){
+                    var newComment = {}
+                    for (var key in comments[i]){
+                        if (key != '_id'){
+                            newComment[key] = comments[i][key]
+                        }
+                    }
+                    newComment.listId = this.list._id
+                    newComment.taskId = this.$store.state.movingTask._id
+                    this.$store.dispatch('addComment', newComment)
+                }
             }
         },
         computed: {
             activeTasks() {
                 return this.$store.state.activeTasks[this.list._id] || []
-            }
+            },
         },
         components: {
             Task,

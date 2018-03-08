@@ -49,9 +49,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div v-for="comment in activeComments">
-            <comment :comment="comment"></comment>
-        </div> -->
     </div>
 </template>
 
@@ -94,6 +91,7 @@
                 this.$store.dispatch('removeTask', task)
             },
             moving(event) {
+                event.dataTransfer.setData('text/javascript/comments', JSON.stringify(this.$store.state.activeComments[this.task._id]))
                 event.dataTransfer.setData('text/javascript', JSON.stringify(this.task))
             },
             removeFromList(){
