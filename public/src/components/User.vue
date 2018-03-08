@@ -29,6 +29,9 @@
             <div class="row">
                 <div class="col-sm-12 boards">
                     <button @click="form = !form" class="btn btn-info">+ Create B&#937;ard</button>
+                    <div droppable="true" v-on:drop.capture="removeBoard" ondragover="event.preventDefault()">
+                        <i class="fas fa-3x fa-trash"></i>
+                    </div>
                 </div>
                 <div v-if="form == true" class="col-sm-12">
                     <form @submit.prevent="createBoard" class="form-group">
@@ -41,9 +44,7 @@
                 <div class="col-sm-3" v-for="board in boards">
                     <board :board="board"></board>
                 </div>
-                <div class="col-sm-3" droppable="true" v-on:drop.capture="removeBoard" ondragover="event.preventDefault()">
-                    <i class="fas fa-7x fa-trash"></i>
-                </div>
+
             </div>
         </div>
     </div>
@@ -75,7 +76,7 @@
             logout() {
                 this.$store.dispatch('logout')
             },
-            removeBoard(event){
+            removeBoard(event) {
                 var board = JSON.parse(event.dataTransfer.getData('text/javascript'))
                 this.$store.dispatch('removeBoard', board)
             },
@@ -105,6 +106,15 @@
         background-image: url("https://www.transparenttextures.com/patterns/rocky-wall.png");
         min-height: 100vh
     }
+
+    .card {
+        background-color: rgba(177, 192, 197, 0.6);
+        box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
+        border: rgb(167, 169, 180) solid .5px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
 
     nav {
         display: flex;
@@ -147,7 +157,7 @@
     .boards {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         margin-top: 5px;
         margin-bottom: 5px

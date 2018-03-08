@@ -182,7 +182,7 @@
 
     .find {
         margin: 5px;
-        width: 20%
+        width: 50%
     }
 
     .flex {
