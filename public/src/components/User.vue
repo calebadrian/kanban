@@ -41,6 +41,9 @@
                 <div class="col-sm-3" v-for="board in boards">
                     <board :board="board"></board>
                 </div>
+                <div class="col-sm-3" droppable="true" v-on:drop.capture="removeBoard" ondragover="event.preventDefault()">
+                    <i class="fas fa-7x fa-trash"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -71,6 +74,10 @@
             },
             logout() {
                 this.$store.dispatch('logout')
+            },
+            removeBoard(event){
+                var board = JSON.parse(event.dataTransfer.getData('text/javascript'))
+                this.$store.dispatch('removeBoard', board)
             },
             resetFields() {
                 Object.assign(this.$data, this.$options.data.call(this));
