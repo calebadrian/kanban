@@ -2,8 +2,10 @@
     <div class="list" droppable="true" v-on:drop.capture="addTask" ondragover="event.preventDefault()">
         <div class="card">
             <div class="card-body">
-                <h4 class="title">{{list.name}}</h4>
-                <i class="fas fa-edit" @click="form = !form"></i>
+                <div class="d-flex justify-content-center">
+                    <h4 class="title">{{list.name}}</h4>
+                    <i class="fas fa-edit" @click="form = !form"></i>
+                </div>
                 <div v-if="form == true" class="col-sm-12">
                     <form @submit.prevent="editList(list)" class="form-group">
                         <input type="text" v-model="list.name" placeholder="Name" class="form-control">
@@ -94,18 +96,18 @@
             sortTasksHigh(list) {
                 var map = []
                 var tasks = this.$store.state.activeTasks[this.list._id]
-                for (var i = 0; i < tasks.length; i++){
-                    if (tasks[i].priority == 'high'){
+                for (var i = 0; i < tasks.length; i++) {
+                    if (tasks[i].priority == 'high') {
                         map.push(tasks[i].priority)
                     }
                 }
-                for (var i = 0; i < tasks.length; i++){
-                    if (tasks[i].priority == 'medium'){
+                for (var i = 0; i < tasks.length; i++) {
+                    if (tasks[i].priority == 'medium') {
                         map.push(tasks[i].priority)
                     }
                 }
-                for (var i = 0; i < tasks.length; i++){
-                    if (tasks[i].priority == 'low'){
+                for (var i = 0; i < tasks.length; i++) {
+                    if (tasks[i].priority == 'low') {
                         map.push(tasks[i].priority)
                     }
                 }
@@ -114,18 +116,18 @@
             sortTasksLow(list) {
                 var map = []
                 var tasks = this.$store.state.activeTasks[this.list._id]
-                for (var i = 0; i < tasks.length; i++){
-                    if (tasks[i].priority == 'low'){
+                for (var i = 0; i < tasks.length; i++) {
+                    if (tasks[i].priority == 'low') {
                         map.push(tasks[i].priority)
                     }
                 }
-                for (var i = 0; i < tasks.length; i++){
-                    if (tasks[i].priority == 'medium'){
+                for (var i = 0; i < tasks.length; i++) {
+                    if (tasks[i].priority == 'medium') {
                         map.push(tasks[i].priority)
                     }
                 }
-                for (var i = 0; i < tasks.length; i++){
-                    if (tasks[i].priority == 'high'){
+                for (var i = 0; i < tasks.length; i++) {
+                    if (tasks[i].priority == 'high') {
                         map.push(tasks[i].priority)
                     }
                 }
@@ -134,12 +136,12 @@
             removeList(list) {
                 this.$store.dispatch('removeList', list)
             },
-            editList(list){
+            editList(list) {
                 this.$store.dispatch('editList', list)
             },
-            addTask(event){
+            addTask(event) {
                 var task = JSON.parse(event.dataTransfer.getData('text/javascript'))
-                this.$store.dispatch('setTask', {list: this.list, task: task})
+                this.$store.dispatch('setTask', { list: this.list, task: task })
             },
             resetFields() {
                 Object.assign(this.$data, this.$options.data.call(this));
@@ -189,6 +191,18 @@
 
     .wide {
         width: 100%
+    }
+
+    .fa-edit {
+        opacity: .4;
+        transition: linear .3s all;
+        margin: 2px
+    }
+
+    .fa-edit:hover {
+        opacity: 1;
+        cursor: pointer;
+        transition: linear .3s all
     }
 
     .btn {

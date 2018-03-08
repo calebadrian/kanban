@@ -3,8 +3,10 @@
         <div class="card task-card">
             <div class="card-body">
                 <div>
-                    <h5 class="title">{{task.description}}</h5>
-                    <i class="fas fa-edit" @click="form = !form"></i>
+                    <div class="d-flex justify-content-center">
+                        <h5 class="title">{{task.description}}</h5>
+                        <i class="fas fa-edit" @click="form = !form"></i>
+                    </div>
                     <div v-if="form == true" class="col-sm-12">
                         <form @submit.prevent="editTask(task)" class="form-group">
                             <input type="text" v-model="task.description" placeholder="Name" class="form-control">
@@ -92,7 +94,7 @@
             removeTask(task) {
                 this.$store.dispatch('removeTask', task)
             },
-            editTask(task){
+            editTask(task) {
                 this.$store.dispatch('setTaskName', task)
             },
             moving(event) {
@@ -151,6 +153,18 @@
     .modal-content {
         display: flex;
         flex-direction: column;
+    }
+
+    .fa-edit {
+        opacity: .4;
+        transition: linear .3s all;
+        margin: 2px
+    }
+
+    .fa-edit:hover {
+        opacity: 1;
+        cursor: pointer;
+        transition: linear .3s all
     }
 
     .btn {
