@@ -9,12 +9,14 @@
             <div class="navbar-nav mr-auto">
                 <h3 class="nav-link">My &#937;meganize B&#937;ards</h3>
             </div>
-            <div>
-                <img :src="user.avatar + user.name" width="50" height="50" class="d-inline-block align-top" alt="">
-            </div>
-            <div>
-                <h6 class="nav-link name">{{user.name}}</h6>
-            </div>
+            <router-link :to="{name: 'Profile', params: {userId: user._id}}" class="title d-flex">
+                <div>
+                    <img :src="user.avatar + user.name" width="50" height="50" class="d-inline-block align-top" alt="">
+                </div>
+                <div>
+                    <h6 class="nav-link name">{{user.name}}</h6>
+                </div>
+            </router-link>
             <div>
                 <button @click="logout" class="btn btn-info">L&#937;g&#937;ut</button>
             </div>
