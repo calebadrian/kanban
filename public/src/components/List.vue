@@ -96,25 +96,7 @@
             addTask(event){
                 var comments = JSON.parse(event.dataTransfer.getData('text/javascript/comments'))
                 var task = JSON.parse(event.dataTransfer.getData('text/javascript'))
-                task.listId = this.list._id
-                var newTask = {}
-                for (var key in task){
-                    if (key != '_id'){
-                        newTask[key] = task[key]
-                    }
-                }
-                this.$store.dispatch('addTask', newTask)
-                for (var i = 0; i < comments.length; i++){
-                    var newComment = {}
-                    for (var key in comments[i]){
-                        if (key != '_id'){
-                            newComment[key] = comments[i][key]
-                        }
-                    }
-                    newComment.listId = this.list._id
-                    newComment.taskId = this.$store.state.movingTask._id
-                    this.$store.dispatch('addComment', newComment)
-                }
+                this.$store.dispatch('setTask', {list: this.list, task: task})
             }
         },
         computed: {
