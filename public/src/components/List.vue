@@ -2,10 +2,15 @@
     <div class="list" droppable="true" v-on:drop.capture="addTask" ondragover="event.preventDefault()">
         <div class="card">
             <div class="card-body">
-                <div class="header">
-                    <h4 class="title">{{list.name}}</h4>
-                    <p class="text-muted">Tasks: {{activeTasks.length}}</p>
+                <h4 class="title">{{list.name}}</h4>
+                <i class="fas fa-edit" @click="form = !form"></i>
+                <div v-if="form == true" class="col-sm-12">
+                    <form @submit.prevent="editList(list)" class="form-group">
+                        <input type="text" v-model="list.name" placeholder="Name" class="form-control">
+                        <button type="submit" class="btn btn-info create" @click="form = !form">Edit</button>
+                    </form>
                 </div>
+                <p class="text-muted">Tasks: {{activeTasks.length}}</p>
                 <div class="buttons">
                     <div class="dropdown wide" v-if="activeTasks.length >1">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -73,6 +78,7 @@
                     description: '',
                     priority: 'medium'
                 },
+                form: false,
                 taskFormHidden: true,
             }
         },
@@ -127,6 +133,9 @@
             },
             removeList(list) {
                 this.$store.dispatch('removeList', list)
+            },
+            editList(list){
+                this.$store.dispatch('editList', list)
             },
             addTask(event){
                 var task = JSON.parse(event.dataTransfer.getData('text/javascript'))

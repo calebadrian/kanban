@@ -5,6 +5,13 @@
                 <h4 class="title">
                     <router-link :to="{name: 'Board', params: {boardId: board._id}}" class="title">{{board.name}}</router-link>
                 </h4>
+                <i class="fas fa-edit" @click="form = !form"></i>
+                <div v-if="form == true" class="col-sm-12">
+                    <form @submit.prevent="editBoard(board)" class="form-group">
+                        <input type="text" v-model="board.name" placeholder="Name" class="form-control">
+                        <button type="submit" class="btn btn-info create" @click="form = !form">Edit</button>
+                    </form>
+                </div>
                 <h6>{{board.description}}</h6>
                 <button @click="removeBoard(board)" class="btn btn-link">Remove {{board.name}}</button>
             </div>
@@ -19,7 +26,7 @@
         props: ['board'],
         data() {
             return {
-
+                form: false,
             }
         },
         methods: {
@@ -28,6 +35,9 @@
             },
             setActiveBoard(board) {
                 this.$store.dispatch('setActiveBoard', board)
+            },
+            editBoard(board){
+                this.$store.dispatch('setBoard', board)
             }
         },
         components: {

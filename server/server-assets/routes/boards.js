@@ -85,10 +85,18 @@ router.post("/api/boards/:boardid/lists/:listid/tasks/:taskid/comments", (req, r
         .catch(next)
 })
 
-router.put("/api/boards/:boardid/lists/:listid", (req, res, next) => {
-    Lists.findById(req.params.listid)
-        .then(list => {
+router.put("/api/boards/:boardid", (req, res, next) => {
+    Boards.findByIdAndUpdate(req.params.boardid, req.body)
+        .then(board => {
+            res.send(board)
+        })
+        .catch(next)
+})
 
+router.put("/api/boards/:boardid/lists/:listid", (req, res, next) => {
+    Lists.findByIdAndUpdate(req.params.listid, req.body)
+        .then(list => {
+            res.send(list)
         })
         .catch(next)
 })

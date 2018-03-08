@@ -121,6 +121,16 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
+        setBoard({commit, dispatch}, payload){
+            api
+                .put('boards/' + payload._id, payload)
+                .then(res => {
+                    dispatch('getBoards')
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
         removeBoard({commit, dispatch}, payload){
             api
                 .delete('boards/' + payload._id)
@@ -157,6 +167,16 @@ export default new vuex.Store({
         addList({commit, dispatch}, payload){
             api
                 .post('boards/' + payload.boardId + '/lists/', payload)
+                .then(res => {
+                    dispatch('getLists', payload.boardId)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        editList({commit, dispatch}, payload){
+            api
+                .put('boards/' + payload.boardId + '/lists/' + payload._id, payload)
                 .then(res => {
                     dispatch('getLists', payload.boardId)
                 })
@@ -276,6 +296,16 @@ export default new vuex.Store({
                             console.error(err)
                         })
                     }
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        setTaskName({commit, dispatch}, payload){
+            api
+                .put('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload._id, payload)
+                .then(res => {
+                    dispatch('getTasks', {boardId: payload.boardId, _id: payload.listId})
                 })
                 .catch(err => {
                     console.error(err)
