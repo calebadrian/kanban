@@ -75,10 +75,14 @@
                 this.list.creatorId = this.$store.state.user._id
                 this.list.boardId = this.$store.state.activeBoard[0]._id
                 this.$store.dispatch('addList', this.list)
+                this.resetFields()
             },
             logout() {
                 this.$store.dispatch('logout')
             },
+            resetFields() {
+                Object.assign(this.$data, this.$options.data.call(this));
+            }
         },
         computed: {
             activeBoard() {

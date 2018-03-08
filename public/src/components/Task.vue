@@ -10,17 +10,6 @@
                     <button data-toggle="modal" :data-target="'#' + task._id" class="btn btn-info">{{activeComments.length}}
                         <i class="far fa-comment"></i>
                     </button>
-                    <!-- <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            Move To
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <div v-for="list in activeLists">
-                                <p class="dropdown-item point" @click=moveTask(list)>{{list.name}}</p>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -36,13 +25,17 @@
                     </div>
                     <div class="modal-body text-center">
                         <form @submit.prevent="createComment">
-                            <div class="form-group">
-                                <input type="text" v-model="comment.body" placeholder="Add Comment">
+                            <div class="form-group flex">
+                                <input type="text" v-model="comment.body" placeholder="Add Comment" class="form-control">
                                 <button class="btn btn-info" type="submit">Submit Comment</button>
                             </div>
                         </form>
-                        <div v-for="comment in activeComments">
-                            <comment :comment="comment"></comment>
+                        <div class="card">
+                            <div class="card-body" v-if="activeComments.length > 0">
+                                <div v-for="comment in activeComments">
+                                    <comment :comment="comment"></comment>
+                                </div>
+                            </div>
                         </div>
                         <button class="btn btn-link" @click="removeTask(task)" data-dismiss="modal">Remove {{task.description}}</button>
                     </div>
@@ -83,6 +76,7 @@
                 this.comment.listId = this.task.listId
                 this.comment.boardId = this.task.boardId
                 this.$store.dispatch('addComment', this.comment)
+                this.resetFields()
             },
             moveTask(list) {
                 this.$store.dispatch('setTask', { list: list, task: this.task })
@@ -94,12 +88,9 @@
                 event.dataTransfer.setData('text/javascript/comments', JSON.stringify(this.$store.state.activeComments[this.task._id]))
                 event.dataTransfer.setData('text/javascript', JSON.stringify(this.task))
             },
-<<<<<<< HEAD
-            removeFromList() {
-                this.$store.dispatch('removeTask', this.task)
+            resetFields() {
+                Object.assign(this.$data, this.$options.data.call(this));
             }
-=======
->>>>>>> a3140ae6845e6b34c12ae42562391a6f190e0498
         },
         components: {
             Comment
