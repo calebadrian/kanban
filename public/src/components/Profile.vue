@@ -49,9 +49,12 @@
                                     <h3 class="title">Y&#937;ur Friends</h3>
                                     <h5 v-if="user.friends.length == 0" class="cinzel text-muted">Y&#937;u Have N&#937; Friends</h5>
                                     <div v-for="friend in user.friends">
-                                        <div class="flex2">
-                                            <h3 class="cinzel">{{friend.name}}</h3>
-                                            <i class="fas fa-minus-circle" @click="removeFromFriends(friend, user)"></i>
+                                        <div class="flex3">
+                                            <img :src="friend.avatar + friend.name" class="friend">
+                                            <div class="flex2">
+                                                <h3 class="cinzel">{{friend.name}}</h3>
+                                                <i class="fas fa-minus-circle" @click="removeFromFriends(friend, user)"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +193,15 @@
     .flex2 {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start
+        justify-content: flex-start;
+        margin-top: 5%
+    }
+
+    .flex3 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center
     }
 
     .cinzel {
@@ -210,4 +221,7 @@
         color: rgb(253, 71, 71)
     }
 
+    .friend {
+        height: 7vh
+    }
 </style>

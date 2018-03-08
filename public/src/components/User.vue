@@ -28,7 +28,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 boards">
-                    <button @click="form = !form" class="btn btn-info">+ Create B&#937;ard</button>
+                    <button @click="form = !form" class="btn colorful">+ Create B&#937;ard</button>
                     <div droppable="true" v-on:drop.capture="removeBoard" ondragover="event.preventDefault()">
                         <i class="fas fa-3x fa-trash"></i>
                     </div>
@@ -177,5 +177,10 @@
 
     .create {
         width: 20%
+    }
+
+    .colorful {
+        background: linear-gradient(left, #7b76fe, #f355fa) !important;
+        color: ivory
     }
 </style>

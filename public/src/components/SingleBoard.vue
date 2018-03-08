@@ -28,8 +28,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12 lists">
-                    <button @click="form = !form" class="btn btn-info">+ Create List</button>
-                    <button @click="deets = !deets" class="btn btn-info">B&#937;ard Details</button>
+                    <button @click="form = !form" class="btn colorful">+ Create List</button>
+                    <button @click="deets = !deets" class="btn colorful">B&#937;ard Details</button>
                 </div>
                 <div v-if="form == true" class="col-sm-12">
                     <form @submit.prevent="createList" class="form-group">
@@ -181,5 +181,10 @@
 
     .create {
         width: 20%
+    }
+
+    .colorful {
+        background: linear-gradient(left, #7b76fe, #f355fa) !important;
+        color: ivory
     }
 </style>
