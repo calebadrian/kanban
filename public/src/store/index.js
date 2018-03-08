@@ -20,7 +20,7 @@ vue.use(vuex)
 export default new vuex.Store({
     state: {
         user: {},
-        users: [],
+        foundUser: {},
         boards: [],
         activeBoard: {},
         activeLists: [],
@@ -33,8 +33,8 @@ export default new vuex.Store({
         setUser(state, payload){
             state.user = payload
         },
-        setUsers(state, payload){
-            state.users = payload
+        setFoundUser(state, payload){
+            state.foundUser = payload
         },
         setBoards(state, payload){
             state.boards = payload
@@ -321,7 +321,7 @@ export default new vuex.Store({
                 .then(res => {
                     var newActiveTasks = payload.map.map(elem => {
                         return res.data.find(obj => {
-                            return obj.priority === elem
+                            return obj._id === elem
                         })
                     })
                     for (var i = 0; i < newActiveTasks.length; i++){
@@ -342,16 +342,6 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        getUsers({commit, dispatch}, payload){
-            api
-                .get('users')
-                .then(res => {
-                    commit('setUsers', res.data)
-                })
-                .catch(err => {
-                    console.error(err)
-                })
-        },
         addToFriends({commit, dispatch}, payload){
             api
                 .put('users/' + payload.user._id, payload.userToAdd)
@@ -367,6 +357,22 @@ export default new vuex.Store({
                 .put('users/' + payload.user._id + '/friends', payload.friend)
                 .then(res => {
                     commit('setUser', res.data)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        findByEmail({commit, dispatch}, payload){
+            api
+                .get('users')
+                .then(res => {
+                    var user = {}
+                    for (var i = 0; i < res.data.length; i++){
+                        if (res.data[i].email == payload.email){
+                            user = res.data[i]
+                        }
+                    }
+                    commit('setFoundUser', user)
                 })
                 .catch(err => {
                     console.error(err)

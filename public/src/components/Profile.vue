@@ -41,6 +41,10 @@
                         </div>
                     </div>
                 </div>
+                <form @submit.prevent="searchByEmail" class="form-group">
+                    <input type="text" v-model="userFind.email" placeholder="email" class="form-control">
+                    <button type="submit" class="btn btn-info create" @click="form = !form">Find User</button>
+                </form>
                 <div v-for="friend in user.friends">
                     <h3>{{friend.name}}</h3>
                     <button class="btn-danger" @click="removeFromFriends(friend, user)">Remove {{friend.name}} from friends</button>
@@ -58,12 +62,11 @@
 <script>
     export default {
         name: 'Profile',
-        mounted() {
-            this.$store.dispatch('getUsers')
-        },
         data() {
             return {
-
+                userFind: {
+                    email: ''
+                }
             }
         },
         computed: {
@@ -72,11 +75,17 @@
             },
             users() {
                 return this.$store.state.users
+            },
+            foundUser() {
+                return this.$store.state.foundUser
             }
         },
         methods: {
             logout() {
                 this.$store.dispatch('logout')
+            },
+            searchByEmail() {
+                this.$store.dispatch('findByEmail', this.userFind)
             },
             addToFriends(userToAdd, user) {
                 for (var i = 0; i < user.friends.length; i++) {
