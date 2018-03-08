@@ -3,16 +3,16 @@
         <img src="../assets/Omeganize_logo2.jpg" class="logo">
 
         <form v-if="showLogin == true" @submit.prevent="login()" class="form-group">
-            <input type="text" v-model="user.email" placeholder="email" class="form-control">
-            <input type="password" v-model="user.password" placeholder="password" class="form-control">
+            <input type="text" v-model="user.email" placeholder="Email" class="form-control">
+            <input type="password" v-model="user.password" placeholder="Password" class="form-control">
             <button type="submit" class="btn btn-info">Submit</button>
         </form>
 
         <form v-if="showLogin == false" @submit.prevent="createUser()" class="form-group">
-            <input type="text" v-model="newUser.name" placeholder="username" class="form-control">
-            <input type="text" v-model="newUser.email" placeholder="email" class="form-control">
-            <input type="password" v-model="newUser.password" placeholder="password" class="form-control">
-            <input type="password" v-model="newUser.confirmPassword" placeholder="confirm password" class="form-control">
+            <input type="text" v-model="newUser.name" placeholder="Username" class="form-control">
+            <input type="text" v-model="newUser.email" placeholder="Email" class="form-control">
+            <input type="password" v-model="newUser.password" placeholder="Password" class="form-control">
+            <input type="password" v-model="newUser.confirmPassword" placeholder="Confirm Password" class="form-control">
             <button type="submit" @click="showLogin = true" class="btn btn-info">Submit</button>
         </form>
 
