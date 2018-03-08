@@ -2,7 +2,7 @@
     <div class="task" draggable="true" v-on:dragstart="moving">
         <div class="card">
             <div class="card-body">
-                <div class="flex">
+                <div>
                     <h5 class="title">{{task.description}}</h5>
                     <i class="fas fa-edit" @click="form = !form"></i>
                     <div v-if="form == true" class="col-sm-12">
@@ -11,12 +11,12 @@
                             <button type="submit" class="btn btn-info create" @click="form = !form">Edit</button>
                         </form>
                     </div>
-                    <h6 class="text-muted">Priority: {{task.priority}}</h6>
                 </div>
                 <div class="flex">
                     <button data-toggle="modal" :data-target="'#' + task._id" class="btn btn-info">{{activeComments.length}}
                         <i class="far fa-comment"></i>
                     </button>
+                    <h6 class="text-muted">Priority: {{task.priority}}</h6>
                 </div>
             </div>
         </div>
@@ -127,7 +127,8 @@
     .flex {
         display: flex;
         flex-direction: row;
-        justify-content: space-between
+        justify-content: space-between;
+        align-items: baseline
     }
 
     .title {
