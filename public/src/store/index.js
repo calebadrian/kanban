@@ -246,6 +246,11 @@ export default new vuex.Store({
                         var list = state.activeLists[i]
                         dispatch('getTasks', list)
                         .then(res => {
+                            if (res == undefined){
+                                res = {
+                                    data: []
+                                }
+                            }
                             commit('setActiveTasks', {listId: list._id, activeTasks: res.data})
                         })
                         .catch(err => {
