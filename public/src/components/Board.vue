@@ -1,5 +1,5 @@
 <template>
-    <div class="board">
+    <div class="board" draggable="true" v-on:dragstart="moving">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-center">
@@ -15,7 +15,6 @@
                     </form>
                 </div>
                 <h6>{{board.description}}</h6>
-                <button @click="removeBoard(board)" class="btn btn-link">Remove {{board.name}}</button>
             </div>
         </div>
     </div>
@@ -32,14 +31,14 @@
             }
         },
         methods: {
-            removeBoard(board) {
-                this.$store.dispatch('removeBoard', board)
-            },
             setActiveBoard(board) {
                 this.$store.dispatch('setActiveBoard', board)
             },
             editBoard(board){
                 this.$store.dispatch('setBoard', board)
+            },
+            moving(event) {
+                event.dataTransfer.setData('text/javascript', JSON.stringify(this.board))
             }
         },
         components: {

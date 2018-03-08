@@ -27,7 +27,7 @@
         <h3>{{user.name}}</h3>
         <form @submit.prevent="searchByEmail" class="form-group">
             <input type="text" v-model="userFind.email" placeholder="email" class="form-control">
-            <button type="submit" class="btn btn-info create" @click="form = !form">Find User</button>
+            <button type="submit" class="btn btn-info create">Find User</button>
         </form>
         <div v-if="foundUser.name">
             <button class="btn-success" @click="addToFriends(foundUser, user)">Add {{foundUser.name}} to Friends</button>

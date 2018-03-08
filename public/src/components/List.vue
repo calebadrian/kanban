@@ -22,6 +22,8 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
                             <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
+                            <p class="dropdown-item" @click=sortTasksCreatedHigh>Created: Newest to Oldest</p>
+                            <p class="dropdown-item" @click=sortTasksCreatedLow>Created: Oldest to Newest</p>
                         </div>
                     </div>
                     <button @click="taskFormHidden = !taskFormHidden" class="btn btn-info wide">Add Task</button>
@@ -95,7 +97,7 @@
             },
             sortTasksHigh(list) {
                 var map = []
-                var tasks = this.$store.state.activeTasks[this.list._id]
+                var tasks = this.$store.state.activeTasks[list._id]
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i].priority == 'high') {
                         map.push(tasks[i]._id)
@@ -115,7 +117,7 @@
             },
             sortTasksLow(list) {
                 var map = []
-                var tasks = this.$store.state.activeTasks[this.list._id]
+                var tasks = this.$store.state.activeTasks[list._id]
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i].priority == 'low') {
                         map.push(tasks[i]._id)
@@ -132,6 +134,20 @@
                     }
                 }
                 this.$store.dispatch('sortTasks', { list: list, map: map })
+            },
+            sortTasksCreatedHigh(){
+                var tasks = this.$store.state.activeTasks[this.list._id]
+                tasks.sort(function(a, b){
+                    return b.created - a.created
+                })
+                this.$store.commit('setActiveTasks', {listId: this.list._id, activeTasks: tasks})
+            },
+            sortTasksCreatedLow(){
+                var tasks = this.$store.state.activeTasks[this.list._id]
+                tasks.sort(function(a, b){
+                    return a.created - b.created
+                })
+                this.$store.commit('setActiveTasks', {listId: this.list._id, activeTasks: tasks})
             },
             removeList(list) {
                 this.$store.dispatch('removeList', list)
