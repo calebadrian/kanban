@@ -40,6 +40,21 @@ router.put('/api/users/:userid', (req, res, next) => {
         .catch(next)
 })
 
+router.put('/api/users/:userid/friends', (req, res, next) => {
+    Users.findById(req.params.userid)
+        .then(user => {
+            for (var i = 0; i < user.friends.length; i++){
+                if (req.body._id == user.friends[i]._id){
+                    user.friends.splice(i, 1)
+                    user.markModified('friends')
+                    user.save()
+                }
+            }
+            return res.send(user)
+        })
+        .catch(next)
+})
+
 router.get("/api/boards/:boardid", (req, res, next) => {
     Boards.find({creatorId: req.session.uid, _id: req.params.boardid})
         .then(board => {

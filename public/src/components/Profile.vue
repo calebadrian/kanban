@@ -27,6 +27,7 @@
         <h3>{{user.name}}</h3>
         <div v-for="friend in user.friends">
             <h3>{{friend.name}}</h3>
+            <button class="btn-danger" @click="removeFromFriends(friend, user)">Remove {{friend.name}} from friends</button>
         </div>
         <div v-for="userToAdd in users">
             <div v-if="userToAdd._id != user._id">
@@ -59,8 +60,18 @@
             logout() {
                 this.$store.dispatch('logout')
             },
-            addToFriends(userToAdd, user){
-                this.$store.dispatch('addFriend', {user: user, userToAdd: userToAdd})
+            addToFriends(userToAdd, user) {
+                for (var i = 0; i < user.friends.length; i++) {
+                    var friend = user.friends[i]
+                    if (friend._id == userToAdd._id) {
+                        alert(userToAdd.name + " is already your friend!")
+                        return
+                    }
+                }
+                this.$store.dispatch('addToFriends', { user: user, userToAdd: userToAdd })
+            },
+            removeFromFriends(friend, user){
+                this.$store.dispatch('removeFromFriends', {user: user, friend: friend})
             }
         }
     }
@@ -86,6 +97,7 @@
     .logo {
         height: 15vh;
     }
+
     .name {
         margin-top: 15%
     }

@@ -361,6 +361,16 @@ export default new vuex.Store({
                 .catch(err => {
                     console.error(err)
                 })
+        },
+        removeFromFriends({commit, dispatch}, payload){
+            api
+                .put('users/' + payload.user._id + '/friends', payload.friend)
+                .then(res => {
+                    commit('setUser', res.data)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
         }
 
     }
