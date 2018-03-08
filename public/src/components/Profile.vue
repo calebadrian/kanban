@@ -78,6 +78,12 @@
 </script>
 
 <style scoped>
+    .profile {
+        background-color: #ffffff;
+        background-image: url("https://www.transparenttextures.com/patterns/rocky-wall.png");
+        min-height: 100vh
+    }
+
     .navbar {
         background-color: black;
         font-family: Cinzel;
