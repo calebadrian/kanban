@@ -94,7 +94,7 @@
                 event.dataTransfer.setData('text/javascript/comments', JSON.stringify(this.$store.state.activeComments[this.task._id]))
                 event.dataTransfer.setData('text/javascript', JSON.stringify(this.task))
             },
-            removeFromList(){
+            removeFromList() {
                 this.$store.dispatch('removeTask', this.task)
             }
         },
@@ -105,6 +105,10 @@
 </script>
 
 <style scoped>
+    .task:hover {
+        cursor: -webkit-grab
+    }
+
     .point {
         cursor: pointer
     }
