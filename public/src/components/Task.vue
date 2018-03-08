@@ -1,5 +1,5 @@
 <template>
-    <div class="task" draggable="true" v-on:dragstart="moving" v-on:dragend="removeFromList">
+    <div class="task" draggable="true" v-on:dragstart="moving">
         <div class="card">
             <div class="card-body">
                 <div class="flex">
@@ -44,7 +44,7 @@
                         <div v-for="comment in activeComments">
                             <comment :comment="comment"></comment>
                         </div>
-                        <button class="btn btn-link" @click="removeTask(task)">Remove {{task.description}}</button>
+                        <button class="btn btn-link" @click="removeTask(task)" data-dismiss="modal">Remove {{task.description}}</button>
                     </div>
                 </div>
             </div>
@@ -94,9 +94,12 @@
                 event.dataTransfer.setData('text/javascript/comments', JSON.stringify(this.$store.state.activeComments[this.task._id]))
                 event.dataTransfer.setData('text/javascript', JSON.stringify(this.task))
             },
+<<<<<<< HEAD
             removeFromList() {
                 this.$store.dispatch('removeTask', this.task)
             }
+=======
+>>>>>>> a3140ae6845e6b34c12ae42562391a6f190e0498
         },
         components: {
             Comment
