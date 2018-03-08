@@ -22,8 +22,8 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
                             <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
-                            <p class="dropdown-item" @click=sortTasksCreatedHigh>Created: Newest to Oldest</p>
-                            <p class="dropdown-item" @click=sortTasksCreatedLow>Created: Oldest to Newest</p>
+                            <p class="dropdown-item" @click=sortTasksNameAtoZ>Name: A to Z</p>
+                            <p class="dropdown-item" @click=sortTasksNameZtoA>Name: Z to A</p>
                         </div>
                     </div>
                     <button @click="taskFormHidden = !taskFormHidden" class="btn btn-info wide">Add Task</button>
@@ -135,17 +135,33 @@
                 }
                 this.$store.dispatch('sortTasks', { list: list, map: map })
             },
-            sortTasksCreatedHigh(){
+            sortTasksNameAtoZ(){
                 var tasks = this.$store.state.activeTasks[this.list._id]
-                tasks.sort(function(a, b){
-                    return b.created - a.created
+                tasks.sort(function (a, b){
+                    var nameA = a.description.toUpperCase()
+                    var nameB = b.description.toUpperCase()
+                    if (nameA < nameB){
+                        return -1
+                    }
+                    if (nameA > nameB){
+                        return 1
+                    }
+                    return 0
                 })
                 this.$store.commit('setActiveTasks', {listId: this.list._id, activeTasks: tasks})
             },
-            sortTasksCreatedLow(){
+            sortTasksNameZtoA(){
                 var tasks = this.$store.state.activeTasks[this.list._id]
-                tasks.sort(function(a, b){
-                    return a.created - b.created
+                tasks.sort(function (a, b){
+                    var nameA = a.description.toUpperCase()
+                    var nameB = b.description.toUpperCase()
+                    if (nameA < nameB){
+                        return 1
+                    }
+                    if (nameA > nameB){
+                        return -1
+                    }
+                    return 0
                 })
                 this.$store.commit('setActiveTasks', {listId: this.list._id, activeTasks: tasks})
             },
