@@ -3,11 +3,20 @@ var Boards = require("../models/board")
 var Lists = require("../models/list")
 var Tasks = require("../models/task")
 var Comments = require("../models/comment")
+var Users = require('../models/user')
 
 router.get("/api/boards", (req, res, next) => {
     Boards.find({creatorId: req.session.uid})
         .then(boards => {
             return res.send(boards)
+        })
+        .catch(next)
+})
+
+router.get("/api/users/:userid", (req, res, next) => {
+    Users.findById(req.params.userid)
+        .then(user => {
+            return res.send(user)
         })
         .catch(next)
 })

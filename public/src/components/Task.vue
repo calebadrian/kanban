@@ -85,7 +85,6 @@
                 this.$store.dispatch('removeTask', task)
             },
             moving(event) {
-                event.dataTransfer.setData('text/javascript/comments', JSON.stringify(this.$store.state.activeComments[this.task._id]))
                 event.dataTransfer.setData('text/javascript', JSON.stringify(this.task))
             },
             resetFields() {

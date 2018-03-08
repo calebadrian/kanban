@@ -84,18 +84,49 @@
                 this.resetFields()
             },
             sortTasksHigh(list) {
-                var map = ['high', 'medium', 'low']
+                var map = []
+                var tasks = this.$store.state.activeTasks[this.list._id]
+                for (var i = 0; i < tasks.length; i++){
+                    if (tasks[i].priority == 'high'){
+                        map.push(tasks[i].priority)
+                    }
+                }
+                for (var i = 0; i < tasks.length; i++){
+                    if (tasks[i].priority == 'medium'){
+                        map.push(tasks[i].priority)
+                    }
+                }
+                for (var i = 0; i < tasks.length; i++){
+                    if (tasks[i].priority == 'low'){
+                        map.push(tasks[i].priority)
+                    }
+                }
                 this.$store.dispatch('sortTasks', { list: list, map: map })
             },
             sortTasksLow(list) {
-                var map = ['low', 'medium', 'high']
+                var map = []
+                var tasks = this.$store.state.activeTasks[this.list._id]
+                for (var i = 0; i < tasks.length; i++){
+                    if (tasks[i].priority == 'low'){
+                        map.push(tasks[i].priority)
+                    }
+                }
+                for (var i = 0; i < tasks.length; i++){
+                    if (tasks[i].priority == 'medium'){
+                        map.push(tasks[i].priority)
+                    }
+                }
+                for (var i = 0; i < tasks.length; i++){
+                    if (tasks[i].priority == 'high'){
+                        map.push(tasks[i].priority)
+                    }
+                }
                 this.$store.dispatch('sortTasks', { list: list, map: map })
             },
             removeList(list) {
                 this.$store.dispatch('removeList', list)
             },
             addTask(event){
-                var comments = JSON.parse(event.dataTransfer.getData('text/javascript/comments'))
                 var task = JSON.parse(event.dataTransfer.getData('text/javascript'))
                 this.$store.dispatch('setTask', {list: this.list, task: task})
             },
