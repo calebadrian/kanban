@@ -34,7 +34,7 @@
             setActiveBoard(board) {
                 this.$store.dispatch('setActiveBoard', board)
             },
-            editBoard(board){
+            editBoard(board) {
                 this.$store.dispatch('setBoard', board)
             },
             moving(event) {
@@ -50,6 +50,10 @@
 
 
 <style scoped>
+    .board {
+        cursor: -webkit-grab;
+    }
+
     .card {
         background-color: rgba(177, 192, 197, 0.6);
         box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
@@ -68,7 +72,7 @@
 
     .title:hover {
         transition: linear .3s all;
-        color:rgb(40, 142, 158);
+        color: rgb(40, 142, 158);
     }
 
     .fa-edit {
