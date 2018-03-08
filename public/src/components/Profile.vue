@@ -43,36 +43,39 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="card">
-                                <div class="card-body"></div>
+                                <div class="card-body">
+                                    <h3 class="title">Y&#937;ur Friends</h3>
+                                    <h5 v-if="user.friends.length == 0" class="cinzel text-muted">Y&#937;u Have N&#937; Friends</h5>
+                                    <div v-for="friend in user.friends">
+                                        <div class="flex2">
+                                            <h3 class="cinzel">{{friend.name}}</h3>
+                                            <i class="fas fa-minus-circle" @click="removeFromFriends(friend, user)"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="title">Add a Friend</h4>
-                            <form @submit.prevent="searchByEmail" class="form-group">
-                                <input type="text" v-model="userFind.email" placeholder="User's Email" class="form-control">
-                                <button type="submit" class="btn btn-info find cinzel" @click="form = !form">Find User</button>
-                            </form>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="title">Add a Friend</h4>
+                                    <form @submit.prevent="searchByEmail" class="form-group">
+                                        <input type="text" v-model="userFind.email" placeholder="User's Email" class="form-control">
+                                        <button type="submit" class="btn btn-info create find">Find User</button>
+                                    </form>
+                                    <div v-if="foundUser.name">
+                                        <button class="btn btn-success" @click="addToFriends(foundUser, user)">Add {{foundUser.name}} to Friends</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div v-for="friend in user.friends">
-                    <h3>{{friend.name}}</h3>
-                    <button class="btn-danger" @click="removeFromFriends(friend, user)">Remove {{friend.name}} from friends</button>
-                </div>
-                <div v-for="userToAdd in users">
-                    <div v-if="userToAdd._id != user._id">
-                        <button class="btn-success" @click="addToFriends(userToAdd, user)">Add {{userToAdd.name}} to Friends</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
@@ -103,6 +106,7 @@
             },
             searchByEmail() {
                 this.$store.dispatch('findByEmail', this.userFind)
+                this.resetFields()
             },
             addToFriends(userToAdd, user) {
                 for (var i = 0; i < user.friends.length; i++) {
@@ -116,6 +120,9 @@
             },
             removeFromFriends(friend, user) {
                 this.$store.dispatch('removeFromFriends', { user: user, friend: friend })
+            },
+            resetFields() {
+                Object.assign(this.$data, this.$options.data.call(this));
             }
         }
     }
@@ -180,7 +187,27 @@
         align-items: baseline
     }
 
+    .flex2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start
+    }
+
     .cinzel {
         font-family: Cinzel
     }
+
+    .fa-minus-circle {
+        font-size: x-small;
+        opacity: .4;
+        transition: linear .3s all
+    }
+
+    .fa-minus-circle:hover {
+        opacity: 1;
+        transition: linear .3s all;
+        cursor: pointer;
+        color: rgb(253, 71, 71)
+    }
+
 </style>
