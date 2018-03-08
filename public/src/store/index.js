@@ -20,6 +20,7 @@ vue.use(vuex)
 export default new vuex.Store({
     state: {
         user: {},
+        users: [],
         boards: [],
         activeBoard: {},
         activeLists: [],
@@ -31,6 +32,9 @@ export default new vuex.Store({
     mutations: {
         setUser(state, payload){
             state.user = payload
+        },
+        setUsers(state, payload){
+            state.users = payload
         },
         setBoards(state, payload){
             state.boards = payload
@@ -333,6 +337,26 @@ export default new vuex.Store({
                 .get('users/' + payload.creatorId)
                 .then(res => {
                     commit('setUserForComment', res.data)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        getUsers({commit, dispatch}, payload){
+            api
+                .get('users')
+                .then(res => {
+                    commit('setUsers', res.data)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        addToFriends({commit, dispatch}, payload){
+            api
+                .put('users/' + payload.user._id, payload.userToAdd)
+                .then(res => {
+                    commit('setUser', res.data)
                 })
                 .catch(err => {
                     console.error(err)

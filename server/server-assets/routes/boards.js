@@ -13,10 +13,29 @@ router.get("/api/boards", (req, res, next) => {
         .catch(next)
 })
 
+router.get("/api/users", (req, res, next) => {
+    Users.find(req.query)
+        .then(users => {
+            return res.send(users)
+        })
+        .catch(next)
+})
+
 router.get("/api/users/:userid", (req, res, next) => {
     Users.findById(req.params.userid)
         .then(user => {
             return res.send(user)
+        })
+        .catch(next)
+})
+
+router.put('/api/users/:userid', (req, res, next) => {
+    Users.findById(req.params.userid)
+        .then(user => {
+            user.friends.push(req.body)
+            user.markModified('friends')
+            user.save()
+            res.send(user)
         })
         .catch(next)
 })

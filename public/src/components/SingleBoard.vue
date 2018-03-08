@@ -9,12 +9,14 @@
             <div class="navbar-nav mr-auto">
                 <h3 class="nav-link" v-if="activeBoard[0]">{{activeBoard[0].name}}</h3>
             </div>
-            <div>
-                <img :src="user.avatar + user.name" width="50" height="50" class="d-inline-block align-top" alt="">
-            </div>
-            <div>
-                <h6 class="nav-link name">{{user.name}}</h6>
-            </div>
+            <router-link :to="{name: 'Profile', params: {userId: user._id}}" class="title d-flex">
+                <div>
+                    <img :src="user.avatar + user.name" width="50" height="50" class="d-inline-block align-top" alt="">
+                </div>
+                <div>
+                    <h6 class="nav-link name">{{user.name}}</h6>
+                </div>
+            </router-link>
             <div>
                 <button @click="logout" class="btn btn-info">L&#937;g&#937;ut</button>
             </div>
@@ -169,7 +171,7 @@
     }
 
     .newList {
-        font-family: Cinzel  
+        font-family: Cinzel
     }
 
     .form-control {

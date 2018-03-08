@@ -11,6 +11,7 @@ var schema = new Schema({
   email: { type: String, required: true, unique: true, lowercase: true },
   password: { type: String, required: true, minlength: 6 },
   created: { type: Number, default: Date.now(), required: true },
+  friends: [{}]
 });
 
 schema.statics.generateHash = function(password) {

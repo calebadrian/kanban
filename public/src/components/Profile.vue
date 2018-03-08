@@ -25,12 +25,23 @@
         </nav>
         <img :src="user.avatar + user.name">
         <h3>{{user.name}}</h3>
+        <div v-for="friend in user.friends">
+            <h3>{{friend.name}}</h3>
+        </div>
+        <div v-for="userToAdd in users">
+            <div v-if="userToAdd._id != user._id">
+                <button class="btn-success" @click="addToFriends(userToAdd, user)">Add {{userToAdd.name}} to Friends</button>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
         name: 'Profile',
+        mounted() {
+            this.$store.dispatch('getUsers')
+        },
         data() {
             return {
 
@@ -39,12 +50,18 @@
         computed: {
             user() {
                 return this.$store.state.user
+            },
+            users() {
+                return this.$store.state.users
             }
         },
         methods: {
             logout() {
                 this.$store.dispatch('logout')
             },
+            addToFriends(userToAdd, user){
+                this.$store.dispatch('addFriend', {user: user, userToAdd: userToAdd})
+            }
         }
     }
 </script>
