@@ -2,8 +2,10 @@
     <div class="list" droppable="true" v-on:drop.capture="addTask" ondragover="event.preventDefault()">
         <div class="card">
             <div class="card-body">
-                <h4 class="title">{{list.name}}</h4>
-                <p class="text-muted">Tasks: {{activeTasks.length}}</p>
+                <div class="header">
+                    <h4 class="title">{{list.name}}</h4>
+                    <p class="text-muted">Tasks: {{activeTasks.length}}</p>
+                </div>
                 <div class="buttons">
                     <div class="dropdown wide" v-if="activeTasks.length >1">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"

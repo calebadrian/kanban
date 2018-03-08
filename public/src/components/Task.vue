@@ -128,7 +128,13 @@
     }
 
     .modal-title {
-        font-family: Cinzel
+        font-family: Cinzel;
+        color: ivory;
+        text-shadow: 2px 1px 10px rgb(150, 150, 150);
+    }
+
+    .modal-header {
+        background: linear-gradient(left, #7b76fe, #f355fa) !important;
     }
 
     .modal-content {

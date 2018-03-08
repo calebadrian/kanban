@@ -33,7 +33,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .comment {
         display: flex;
         flex-direction: row;
