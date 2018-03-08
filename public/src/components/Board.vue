@@ -42,7 +42,9 @@
     .card {
         background-color: rgba(177, 192, 197, 0.6);
         box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
-        border: rgb(167, 169, 180) solid .5px
+        border: rgb(167, 169, 180) solid .5px;
+        margin-top: 5px;
+        margin-bottom: 5px
     }
 
     .title {

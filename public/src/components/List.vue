@@ -81,6 +81,7 @@
                 this.task.listId = list._id
                 this.task.boardId = this.$store.state.activeBoard[0]._id
                 this.$store.dispatch('addTask', this.task)
+                this.resetFields()
             },
             sortTasksHigh(list) {
                 var map = []
@@ -128,6 +129,9 @@
             addTask(event){
                 var task = JSON.parse(event.dataTransfer.getData('text/javascript'))
                 this.$store.dispatch('setTask', {list: this.list, task: task})
+            },
+            resetFields() {
+                Object.assign(this.$data, this.$options.data.call(this));
             }
         },
         computed: {

@@ -62,13 +62,17 @@
             }
         },
         methods: {
-            createBoard() {
+            createBoard(event) {
                 this.board.creatorId = this.$store.state.user._id
                 this.$store.dispatch('addBoard', this.board)
+                this.resetFields()
             },
             logout() {
                 this.$store.dispatch('logout')
             },
+            resetFields() {
+                Object.assign(this.$data, this.$options.data.call(this));
+            }
         },
         components: {
             Board

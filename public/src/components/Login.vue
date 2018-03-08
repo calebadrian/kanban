@@ -54,6 +54,10 @@
                     return
                 }
                 this.$store.dispatch('createUser', this.newUser)
+                this.resetFields()
+            },
+            resetFields() {
+                Object.assign(this.$data, this.$options.data.call(this));
             }
         }
     }
