@@ -25,7 +25,8 @@ export default new vuex.Store({
         activeLists: [],
         activeTasks: [],
         activeComments: [],
-        movingTask: {}
+        movingTask: {},
+        userForComment: {}
     },
     mutations: {
         setUser(state, payload){
@@ -48,6 +49,9 @@ export default new vuex.Store({
         },
         setMovingTask(state, payload){
             state.movingTask = payload
+        },
+        setUserForComment(state, payload){
+            state.userForComment = payload
         }
     },
     actions: {
@@ -231,6 +235,16 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
+        removeComment({commit, dispatch}, payload){
+            api
+                .delete('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + '/comments/' + payload._id)
+                .then(res => {
+                    dispatch('getComments', {boardId: payload.boardId, listId: payload.listId, _id: payload.taskId})
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
         getCommentsAfterAdd({commit, dispatch}, payload){
             api
                 .get('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + '/comments')
@@ -282,6 +296,16 @@ export default new vuex.Store({
                         }
                     }
                     commit('setActiveTasks', {listId: payload.list._id, activeTasks: newActiveTasks})
+                })
+        },
+        getUserForComment({commit, dispatch}, payload){
+            api
+                .get('users/' + payload.creatorId)
+                .then(res => {
+                    commit('setUserForComment', res.data)
+                })
+                .catch(err => {
+                    console.error(err)
                 })
         }
 
