@@ -98,17 +98,17 @@
                 var tasks = this.$store.state.activeTasks[this.list._id]
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i].priority == 'high') {
-                        map.push(tasks[i].priority)
+                        map.push(tasks[i]._id)
                     }
                 }
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i].priority == 'medium') {
-                        map.push(tasks[i].priority)
+                        map.push(tasks[i]._id)
                     }
                 }
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i].priority == 'low') {
-                        map.push(tasks[i].priority)
+                        map.push(tasks[i]._id)
                     }
                 }
                 this.$store.dispatch('sortTasks', { list: list, map: map })
@@ -118,17 +118,17 @@
                 var tasks = this.$store.state.activeTasks[this.list._id]
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i].priority == 'low') {
-                        map.push(tasks[i].priority)
+                        map.push(tasks[i]._id)
                     }
                 }
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i].priority == 'medium') {
-                        map.push(tasks[i].priority)
+                        map.push(tasks[i]._id)
                     }
                 }
                 for (var i = 0; i < tasks.length; i++) {
                     if (tasks[i].priority == 'high') {
-                        map.push(tasks[i].priority)
+                        map.push(tasks[i]._id)
                     }
                 }
                 this.$store.dispatch('sortTasks', { list: list, map: map })

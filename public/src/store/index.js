@@ -321,7 +321,7 @@ export default new vuex.Store({
                 .then(res => {
                     var newActiveTasks = payload.map.map(elem => {
                         return res.data.find(obj => {
-                            return obj.priority === elem
+                            return obj._id === elem
                         })
                     })
                     for (var i = 0; i < newActiveTasks.length; i++){
