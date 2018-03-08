@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="navbar-nav mr-auto">
-
+                <h3 class="nav-link">My Pr&#937;file</h3>
             </div>
             <div>
                 <img :src="user.avatar + user.name" width="50" height="50" class="d-inline-block align-top" alt="">
@@ -23,15 +23,33 @@
                 <img src="../assets/Omeganize_logo4.jpg" width="40" height="35">
             </div>
         </nav>
-        <img :src="user.avatar + user.name">
-        <h3>{{user.name}}</h3>
-        <div v-for="friend in user.friends">
-            <h3>{{friend.name}}</h3>
-            <button class="btn-danger" @click="removeFromFriends(friend, user)">Remove {{friend.name}} from friends</button>
-        </div>
-        <div v-for="userToAdd in users">
-            <div v-if="userToAdd._id != user._id">
-                <button class="btn-success" @click="addToFriends(userToAdd, user)">Add {{userToAdd.name}} to Friends</button>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img :src="user.avatar + user.name">
+                            <h3 class="username">{{user.name}}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body flex">
+                            <h4>Username: {{user.name}}</h4>
+                            <h4>Email: {{user.email}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div v-for="friend in user.friends">
+                    <h3>{{friend.name}}</h3>
+                    <button class="btn-danger" @click="removeFromFriends(friend, user)">Remove {{friend.name}} from friends</button>
+                </div>
+                <div v-for="userToAdd in users">
+                    <div v-if="userToAdd._id != user._id">
+                        <button class="btn-success" @click="addToFriends(userToAdd, user)">Add {{userToAdd.name}} to Friends</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -70,8 +88,8 @@
                 }
                 this.$store.dispatch('addToFriends', { user: user, userToAdd: userToAdd })
             },
-            removeFromFriends(friend, user){
-                this.$store.dispatch('removeFromFriends', {user: user, friend: friend})
+            removeFromFriends(friend, user) {
+                this.$store.dispatch('removeFromFriends', { user: user, friend: friend })
             }
         }
     }
@@ -84,6 +102,22 @@
         min-height: 100vh
     }
 
+    .card {
+        background-color: rgba(177, 192, 197, 0.6);
+        box-shadow: 5px 5px 20px rgba(123, 115, 134, 0.75);
+        border: rgb(167, 169, 180) solid .5px;
+        margin-top: 5px;
+        margin-bottom: 5px
+    }
+
+    .title {
+        font-family: Cinzel;
+        color: indigo;
+        transition: linear .3s all;
+        text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
+    }
+
+
     .navbar {
         background-color: black;
         font-family: Cinzel;
@@ -93,7 +127,7 @@
     .nav-link {
         color: #36afc2 !important;
         margin-top: 1%;
-        text-shadow: 2px 1px 10px rgb(150, 150, 150);
+        text-shadow: 2px 1px 10px rgb(109, 107, 107);
     }
 
     .navbar-brand {
@@ -106,5 +140,16 @@
 
     .name {
         margin-top: 15%
+    }
+
+    .username {
+        margin-top: 2%;
+        font-family: Cinzel
+    }
+
+    .flex {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline
     }
 </style>

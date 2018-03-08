@@ -114,7 +114,7 @@
     .nav-link {
         color: #36afc2 !important;
         margin-top: 1%;
-        text-shadow: 2px 1px 10px rgb(150, 150, 150);
+        text-shadow: 2px 1px 10px rgb(109, 107, 107);
     }
 
     .navbar-brand {
