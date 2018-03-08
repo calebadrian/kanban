@@ -105,6 +105,10 @@
                 this.$store.dispatch('logout')
             },
             searchByEmail() {
+                if (this.$store.state.user.email == this.userFind.email){
+                    alert("You can't be your own friend!")
+                    return
+                }
                 this.$store.dispatch('findByEmail', this.userFind)
                 this.resetFields()
             },
