@@ -93,9 +93,6 @@
             removeList(list) {
                 this.$store.dispatch('removeList', list)
             },
-            drag(event) {
-                console.log('hi')
-            }
         },
         computed: {
             activeTasks() {
