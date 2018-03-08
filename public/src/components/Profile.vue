@@ -29,22 +29,39 @@
                     <div class="card">
                         <div class="card-body">
                             <img :src="user.avatar + user.name">
-                            <h3 class="username">{{user.name}}</h3>
+                            <h3 class="title">{{user.name}}</h3>
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body flex cinzel">
+                                    <h4>Username: {{user.name}}</h4>
+                                    <h4>Email: {{user.email}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
                     <div class="card">
-                        <div class="card-body flex">
-                            <h4>Username: {{user.name}}</h4>
-                            <h4>Email: {{user.email}}</h4>
+                        <div class="card-body">
+                            <h4 class="title">Add a Friend</h4>
+                            <form @submit.prevent="searchByEmail" class="form-group">
+                                <input type="text" v-model="userFind.email" placeholder="User's Email" class="form-control">
+                                <button type="submit" class="btn btn-info find cinzel" @click="form = !form">Find User</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <form @submit.prevent="searchByEmail" class="form-group">
-                    <input type="text" v-model="userFind.email" placeholder="email" class="form-control">
-                    <button type="submit" class="btn btn-info create" @click="form = !form">Find User</button>
-                </form>
                 <div v-for="friend in user.friends">
                     <h3>{{friend.name}}</h3>
                     <button class="btn-danger" @click="removeFromFriends(friend, user)">Remove {{friend.name}} from friends</button>
@@ -124,6 +141,7 @@
         color: indigo;
         transition: linear .3s all;
         text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
+        margin-top: 2%
     }
 
 
@@ -151,14 +169,18 @@
         margin-top: 15%
     }
 
-    .username {
-        margin-top: 2%;
-        font-family: Cinzel
+    .find {
+        margin: 5px;
+        width: 20%
     }
 
     .flex {
         display: flex;
         flex-direction: column;
         align-items: baseline
+    }
+
+    .cinzel {
+        font-family: Cinzel
     }
 </style>
