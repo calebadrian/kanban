@@ -184,7 +184,7 @@
     }
 
     .colorful {
-        background: linear-gradient(left, #7b76fe, #f355fa) !important;
+        background: -webkit-linear-gradient(left, #7b76fe, #f355fa) !important;
         color: ivory
     }
 </style>

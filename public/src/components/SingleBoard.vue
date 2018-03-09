@@ -73,6 +73,7 @@
     export default {
         name: "SingleBoard",
         mounted() {
+            this.$store.dispatch('authenticateBoard')
             this.$store.dispatch('getBoardById', this.$route.params.boardId)
             this.$store.dispatch('getLists', this.$route.params.boardId)
         },
@@ -200,7 +201,7 @@
     }
 
     .colorful {
-        background: linear-gradient(left, #7b76fe, #f355fa) !important;
+        background: -webkit-linear-gradient(left, #7b76fe, #f355fa) !important;
         color: ivory
     }
 </style>

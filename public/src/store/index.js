@@ -74,6 +74,30 @@ export default new vuex.Store({
                     router.push({ name: 'Login' })
                 })
         },
+        authenticateProfile({ commit, dispatch }) {
+            auth
+                .get('authenticate')
+                .then(res => {
+                    commit('setUser', res.data)
+                    router.push({ name: 'Profile' })
+                })
+                .catch(err => {
+                    console.log('Invalid Username or Password')
+                    router.push({ name: 'Login' })
+                })
+        },
+        authenticateBoard({ commit, dispatch }) {
+            auth
+                .get('authenticate')
+                .then(res => {
+                    commit('setUser', res.data)
+                    router.push({ name: 'Board' })
+                })
+                .catch(err => {
+                    console.log('Invalid Username or Password')
+                    router.push({ name: 'Login' })
+                })
+        },
         login({ commit, dispatch }, payload) {
             auth
                 .post('login', payload)
@@ -90,8 +114,7 @@ export default new vuex.Store({
             auth
                 .post('register', payload)
                 .then(res => {
-                    alert("user was created successfully")
-                    router.push({ name: 'Login' })
+                    router.push({ name: 'Profile' })
                 })
                 .catch(err => {
                     console.log("Invalid username or password")

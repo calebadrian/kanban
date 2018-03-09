@@ -107,6 +107,9 @@
                 }
             }
         },
+        mounted(){
+            this.$store.dispatch('authenticateProfile')
+        },
         computed: {
             user() {
                 return this.$store.state.user
