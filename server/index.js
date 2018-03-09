@@ -3,12 +3,12 @@ var bp = require('body-parser');
 var cors = require('cors');
 var server = express();
 require('./server-assets/db/mlab-config');
-var port = 3000;
+var port = process.env.PORT || 3000;
 var session = require("./server-assets/auth/session");
 var authRoutes = require("./server-assets/auth/routes");
 var boardRoutes = require("./server-assets/routes/boards")
 
-var whitelist = ['http://localhost:8080'];
+var whitelist = ['http://localhost:8080', 'https://omeganize.herokuapp.com'];
 var corsOptions = {
 	origin: function (origin, callback) {
 		var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
@@ -21,6 +21,7 @@ server.use(cors(corsOptions));
 server.use(session);
 server.use(bp.json());
 server.use(bp.urlencoded({extended: true}));
+server.use(express.static(__dirname + "/../public/dist"))
 
 server.use(authRoutes);
 server.use(boardRoutes)
