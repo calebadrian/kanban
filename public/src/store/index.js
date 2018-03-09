@@ -123,7 +123,6 @@ export default new vuex.Store({
                             }
                         }
                     }
-                    console.log(myBoards)
                     commit('setBoards', myBoards)
                 })
                 .catch(err => {
