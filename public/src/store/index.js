@@ -30,82 +30,82 @@ export default new vuex.Store({
         userForComment: {}
     },
     mutations: {
-        setUser(state, payload){
+        setUser(state, payload) {
             state.user = payload
         },
-        setFoundUser(state, payload){
+        setFoundUser(state, payload) {
             state.foundUser = payload
         },
-        setBoards(state, payload){
+        setBoards(state, payload) {
             state.boards = payload
         },
-        setActiveBoard(state, payload){
+        setActiveBoard(state, payload) {
             state.activeBoard = payload
         },
-        setActiveLists(state, payload){
+        setActiveLists(state, payload) {
             state.activeLists = payload
         },
-        setActiveTasks(state, payload){
+        setActiveTasks(state, payload) {
             vue.set(state.activeTasks, payload.listId, payload.activeTasks || [])
         },
-        setActiveComments(state, payload){
+        setActiveComments(state, payload) {
             vue.set(state.activeComments, payload.taskId, payload.activeComments || [])
         },
-        setMovingTask(state, payload){
+        setMovingTask(state, payload) {
             state.movingTask = payload
         },
-        setUserForComment(state, payload){
+        setUserForComment(state, payload) {
             state.userForComment = payload
         }
     },
     actions: {
-        authenticate({commit, dispatch}){
+        authenticate({ commit, dispatch }) {
             auth
                 .get('authenticate')
-                    .then(res => {
-                        commit('setUser', res.data)
-                        router.push({name: 'Home'})
-                    })
-                    .catch(err => {
-                        console.log('Invalid Username or Password')
-                        router.push({name: 'Login'})
-                    })
+                .then(res => {
+                    commit('setUser', res.data)
+                    router.push({ name: 'Home' })
+                })
+                .catch(err => {
+                    console.log('Invalid Username or Password')
+                    router.push({ name: 'Login' })
+                })
         },
-        login({commit, dispatch}, payload){
+        login({ commit, dispatch }, payload) {
             auth
                 .post('login', payload)
-                    .then(res => {
-                        commit('setUser', res.data)
-                        router.push({name: 'Home'})
-                    })
-                    .catch(err => {
-                        console.log('Invalid Username or Password')
-                        router.push({name: 'Login'})
-                    })
+                .then(res => {
+                    commit('setUser', res.data)
+                    router.push({ name: 'Home' })
+                })
+                .catch(err => {
+                    console.log('Invalid Username or Password')
+                    router.push({ name: 'Login' })
+                })
         },
-        createUser({commit, dispatch}, payload){
+        createUser({ commit, dispatch }, payload) {
             auth
                 .post('register', payload)
-                    .then(res => {
-                        alert("user was created successfully")
-                        router.push({name: 'Login'})
-                    })
-                    .catch(err => {
-                        console.log("Invalid username or password")
-                        router.push({name: 'Login'})
-                    })
+                .then(res => {
+                    alert("user was created successfully")
+                    router.push({ name: 'Login' })
+                })
+                .catch(err => {
+                    console.log("Invalid username or password")
+                    router.push({ name: 'Login' })
+                })
         },
-        logout({commit, dispatch}){
+        logout({ commit, dispatch }) {
             auth
                 .delete('logout')
                 .then(res => {
-                    router.push({name: 'Login'})
+                    router.push({ name: 'Login' })
                 })
                 .catch(err => {
                     console.error(err)
                 })
         },
-        getBoards({commit, dispatch}){
+        getBoards({ commit, dispatch }) {
             api
                 .get('boards')
                 .then(res => {
@@ -115,7 +115,7 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        addBoard({commit, dispatch}, payload){
+        addBoard({ commit, dispatch }, payload) {
             api
                 .post('boards', payload)
                 .then(res => {
@@ -125,7 +125,7 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        setBoard({commit, dispatch}, payload){
+        setBoard({ commit, dispatch }, payload) {
             api
                 .put('boards/' + payload._id, payload)
                 .then(res => {
@@ -135,7 +135,7 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        removeBoard({commit, dispatch}, payload){
+        removeBoard({ commit, dispatch }, payload) {
             api
                 .delete('boards/' + payload._id)
                 .then(res => {
@@ -145,10 +145,10 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        setActiveBoard({commit, dispatch}, payload){
+        setActiveBoard({ commit, dispatch }, payload) {
             commit('setActiveBoard', payload)
         },
-        getBoardById({commit, dispatch}, payload){
+        getBoardById({ commit, dispatch }, payload) {
             api
                 .get('boards/' + payload)
                 .then(res => {
@@ -158,7 +158,7 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        getLists({commit, dispatch}, payload){
+        getLists({ commit, dispatch }, payload) {
             api
                 .get('boards/' + payload + '/lists')
                 .then(res => {
@@ -168,7 +168,7 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        addList({commit, dispatch}, payload){
+        addList({ commit, dispatch }, payload) {
             api
                 .post('boards/' + payload.boardId + '/lists/', payload)
                 .then(res => {
@@ -178,7 +178,7 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        editList({commit, dispatch}, payload){
+        editList({ commit, dispatch }, payload) {
             api
                 .put('boards/' + payload.boardId + '/lists/' + payload._id, payload)
                 .then(res => {
@@ -188,7 +188,7 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        removeList({commit, dispatch}, payload){
+        removeList({ commit, dispatch }, payload) {
             api
                 .delete('boards/' + payload.boardId + '/lists/' + payload._id)
                 .then(res => {
@@ -198,17 +198,17 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        getTasks({commit, dispatch}, payload){
+        getTasks({ commit, dispatch }, payload) {
             api
                 .get('boards/' + payload.boardId + '/lists/' + payload._id + '/tasks')
                 .then(res => {
-                    commit('setActiveTasks', {listId: payload._id, activeTasks: res.data})
+                    commit('setActiveTasks', { listId: payload._id, activeTasks: res.data })
                 })
                 .catch(err => {
                     console.error(err)
                 })
         },
-        addTask({commit, dispatch}, payload){
+        addTask({ commit, dispatch }, payload) {
             api
                 .post('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks', payload)
                 .then(res => {
@@ -219,37 +219,37 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        removeTask({commit, dispatch}, payload){
+        removeTask({ commit, dispatch }, payload) {
             api
                 .delete('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload._id)
                 .then(res => {
-                    dispatch('getTasks', {boardId: payload.boardId, _id: payload.listId})
+                    dispatch('getTasks', { boardId: payload.boardId, _id: payload.listId })
                 })
                 .catch(err => {
                     console.error(err)
                 })
         },
-        getTasksAfterAdd({commit, dispatch}, payload){
+        getTasksAfterAdd({ commit, dispatch }, payload) {
             api
                 .get('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks')
                 .then(res => {
-                    commit('setActiveTasks', {listId: payload.listId, activeTasks: res.data})
+                    commit('setActiveTasks', { listId: payload.listId, activeTasks: res.data })
                 })
                 .catch(err => {
                     console.error(err)
                 })
         },
-        getComments({commit, dispatch}, payload){
+        getComments({ commit, dispatch }, payload) {
             api
                 .get('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload._id + '/comments')
                 .then(res => {
-                    commit('setActiveComments', {taskId: payload._id, activeComments: res.data})
+                    commit('setActiveComments', { taskId: payload._id, activeComments: res.data })
                 })
                 .catch(err => {
                     console.error(err)
                 })
         },
-        addComment({commit, dispatch}, payload){
+        addComment({ commit, dispatch }, payload) {
             api
                 .post('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + '/comments', payload)
                 .then(res => {
@@ -259,63 +259,63 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        removeComment({commit, dispatch}, payload){
+        removeComment({ commit, dispatch }, payload) {
             api
                 .delete('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + '/comments/' + payload._id)
                 .then(res => {
-                    dispatch('getComments', {boardId: payload.boardId, listId: payload.listId, _id: payload.taskId})
+                    dispatch('getComments', { boardId: payload.boardId, listId: payload.listId, _id: payload.taskId })
                 })
                 .catch(err => {
                     console.error(err)
                 })
         },
-        getCommentsAfterAdd({commit, dispatch}, payload){
+        getCommentsAfterAdd({ commit, dispatch }, payload) {
             api
                 .get('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + '/comments')
                 .then(res => {
-                    commit('setActiveComments', {taskId: payload.taskId, activeComments: res.data})
+                    commit('setActiveComments', { taskId: payload.taskId, activeComments: res.data })
                 })
                 .catch(err => {
                     console.error(err)
                 })
         },
-        setTask({commit, state, dispatch}, payload){
+        setTask({ commit, state, dispatch }, payload) {
             var temp = payload.task
             payload.task.listId = payload.list._id
             api
                 .put('boards/' + payload.list.boardId + '/lists/' + payload.list._id + '/tasks/' + payload.task._id, payload.task)
                 .then(res => {
-                    for (var i = 0; i < state.activeLists.length; i++){
+                    for (var i = 0; i < state.activeLists.length; i++) {
                         var list = state.activeLists[i]
                         dispatch('getTasks', list)
-                        .then(res => {
-                            if (res == undefined){
-                                res = {
-                                    data: []
+                            .then(res => {
+                                if (res == undefined) {
+                                    res = {
+                                        data: []
+                                    }
                                 }
-                            }
-                            commit('setActiveTasks', {listId: list._id, activeTasks: res.data})
-                        })
-                        .catch(err => {
-                            console.error(err)
-                        })
+                                commit('setActiveTasks', { listId: list._id, activeTasks: res.data })
+                            })
+                            .catch(err => {
+                                console.error(err)
+                            })
                     }
                 })
                 .catch(err => {
                     console.error(err)
                 })
         },
-        setTaskName({commit, dispatch}, payload){
+        setTaskName({ commit, dispatch }, payload) {
             api
                 .put('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload._id, payload)
                 .then(res => {
-                    dispatch('getTasks', {boardId: payload.boardId, _id: payload.listId})
+                    dispatch('getTasks', { boardId: payload.boardId, _id: payload.listId })
                 })
                 .catch(err => {
                     console.error(err)
                 })
         },
-        sortTasks({commit, dispatch}, payload){
+        sortTasks({ commit, dispatch }, payload) {
             api
                 .get('boards/' + payload.list.boardId + '/lists/' + payload.list._id + '/tasks')
                 .then(res => {
@@ -324,15 +324,15 @@ export default new vuex.Store({
                             return obj._id === elem
                         })
                     })
-                    for (var i = 0; i < newActiveTasks.length; i++){
-                        if (newActiveTasks[i] == undefined){
+                    for (var i = 0; i < newActiveTasks.length; i++) {
+                        if (newActiveTasks[i] == undefined) {
                             newActiveTasks.splice(i, 1)
                         }
                     }
-                    commit('setActiveTasks', {listId: payload.list._id, activeTasks: newActiveTasks})
+                    commit('setActiveTasks', { listId: payload.list._id, activeTasks: newActiveTasks })
                 })
         },
-        getUserForComment({commit, dispatch}, payload){
+        getUserForComment({ commit, dispatch }, payload) {
             api
                 .get('users/' + payload.creatorId)
                 .then(res => {
@@ -342,7 +342,7 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        addToFriends({commit, dispatch}, payload){
+        addToFriends({ commit, dispatch }, payload) {
             api
                 .put('users/' + payload.user._id, payload.userToAdd)
                 .then(res => {
@@ -352,7 +352,7 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        removeFromFriends({commit, dispatch}, payload){
+        removeFromFriends({ commit, dispatch }, payload) {
             api
                 .put('users/' + payload.user._id + '/friends', payload.friend)
                 .then(res => {
@@ -362,17 +362,26 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        findByEmail({commit, dispatch}, payload){
+        findByEmail({ commit, dispatch }, payload) {
             api
                 .get('users')
                 .then(res => {
                     var user = {}
-                    for (var i = 0; i < res.data.length; i++){
-                        if (res.data[i].email == payload.email){
+                    for (var i = 0; i < res.data.length; i++) {
+                        if (res.data[i].email == payload.email) {
                             user = res.data[i]
                         }
                     }
                     commit('setFoundUser', user)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        setName({ commit, dispatch }, payload) {
+            api.put('users/' + payload._id + '/name', payload)
+                .then(res => {
+                    commit('setUser', res.data)
                 })
                 .catch(err => {
                     console.error(err)

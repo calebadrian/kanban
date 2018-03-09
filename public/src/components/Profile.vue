@@ -28,7 +28,7 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body">
-                            <img :src="user.avatar + user.name">
+                            <img :src="user.avatar + user.name" class="avatar">
                             <h3 class="title">{{user.name}}</h3>
                         </div>
                     </div>
@@ -38,8 +38,20 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body flex cinzel">
-                                    <h4>Username: {{user.name}}</h4>
-                                    <h4>Email: {{user.email}}</h4>
+                                    <div class="d-flex" v-if="nameForm == false">
+                                        <h4>Username: {{user.name}}</h4>
+                                        <i class="fas fa-edit" @click="nameForm = !nameForm"></i>
+                                    </div>
+                                        <div v-if="nameForm == true">
+                                            <form @submit.prevent="editName(user)" class="form-group d-flex align-items-start">
+                                                <h4>Username:&nbsp;&nbsp;</h4>
+                                                <input type="text" v-model="user.name" placeholder="New Username" class="form-control">
+                                                <button type="submit" class="btn btn-info create" @click="form = !form">Edit</button>
+                                            </form>
+                                        </div>
+                                    <div class="d-flex">
+                                        <h4>Email: {{user.email}}</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -87,6 +99,7 @@
         name: 'Profile',
         data() {
             return {
+                nameForm: false,
                 userFind: {
                     email: ''
                 }
@@ -108,7 +121,7 @@
                 this.$store.dispatch('logout')
             },
             searchByEmail() {
-                if (this.$store.state.user.email == this.userFind.email){
+                if (this.$store.state.user.email == this.userFind.email) {
                     alert("You can't be your own friend!")
                     return
                 }
@@ -130,7 +143,10 @@
             },
             resetFields() {
                 Object.assign(this.$data, this.$options.data.call(this));
-            }
+            },
+            editName(user) {
+                this.$store.dispatch('setName', user)
+            },
         }
     }
 </script>
@@ -158,6 +174,9 @@
         margin-top: 2%
     }
 
+    .avatar {
+        width: 55%
+    }
 
     .navbar {
         background-color: black;
@@ -227,5 +246,17 @@
 
     .friend {
         height: 7vh
+    }
+
+    .fa-edit {
+        opacity: .4;
+        transition: linear .3s all;
+        margin: 2px
+    }
+
+    .fa-edit:hover {
+        opacity: 1;
+        cursor: pointer;
+        transition: linear .3s all
     }
 </style>
