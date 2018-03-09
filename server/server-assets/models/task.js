@@ -7,9 +7,9 @@ var Comments = require("../models/comment")
 var priorities = ["high", "medium", "low"]
 
 var schema = new Schema({
-    creatorId: {type: ObjectId, ref: 'User'},
-    listId: {type: ObjectId, ref: 'List'},
-    boardId: {type: ObjectId, ref: 'Board'},
+    creatorId: {type: ObjectId, ref: 'User', required: true},
+    listId: {type: ObjectId, ref: 'List', required: true},
+    boardId: {type: ObjectId, ref: 'Board', required: true},
     created: { type: Number, default: Date.now(), required: true },   
     description: {type: String},
     priority: {type: String, enum: priorities}
