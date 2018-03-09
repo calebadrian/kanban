@@ -8,9 +8,35 @@
                         <i class="fas fa-edit" @click="form = !form"></i>
                     </div>
                     <div v-if="form == true" class="col-sm-12">
-                        <form @submit.prevent="editTask(task)" class="form-group">
-                            <input type="text" v-model="task.description" placeholder="Name" class="form-control">
-                            <button type="submit" class="btn btn-info create" @click="form = !form">Edit</button>
+                        <form @submit.prevent="editTask(task)">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input type="text" v-model="task.description" placeholder="Task Name" class="form-control text-mar">
+                                </div>
+                                <div class="flex col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <input type="radio" id="high" value="high" v-model="task.priority" class="form-check-input">
+                                            <label for="high">
+                                                High Priority
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="radio" id="medium" value="medium" v-model="task.priority" class="form-check-input" checked>
+                                            <label for="medium">
+                                                Medium Priority
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="radio" id="low" value="low" v-model="task.priority" class="form-check-input">
+                                            <label for="low">
+                                                Low Priority
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-info create" @click="form = !form">Edit Task</button>
                         </form>
                     </div>
                 </div>
