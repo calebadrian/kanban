@@ -43,7 +43,7 @@ router.put('/api/users/:userid', (req, res, next) => {
 router.put('/api/users/:userid/name', (req, res, next) => {
     Users.findById(req.params.userid)
         .then(user => {
-            user.name = req.body
+            user.name = req.body.name
             res.send(user)
         })
         .catch(next)
