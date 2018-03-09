@@ -9,7 +9,8 @@ var Comments = require("../models/comment")
 var schema = new Schema({
     name: {type: String, required: true},
     creatorId: {type: ObjectId, ref: 'User', required: true},
-    description: {type: String}
+    description: {type: String},
+    collabs: []
 })
 
 schema.pre('remove', function(next) {

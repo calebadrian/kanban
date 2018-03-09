@@ -105,11 +105,26 @@ export default new vuex.Store({
                     console.error(err)
                 })
         },
-        getBoards({ commit, dispatch }) {
+        getBoards({ commit, dispatch, state }) {
             api
                 .get('boards')
                 .then(res => {
-                    commit('setBoards', res.data)
+                    var myBoards = []
+                    for (var i = 0; i < res.data.length; i++) {
+                        var board = res.data[i]
+                        if (board.creatorId == state.user._id) {
+                            myBoards.push(board)
+                            continue
+                        }
+                        for (var j = 0; j < board.collabs.length; j++) {
+                            var collab = board.collabs[i]
+                            if (collab == state.user._id) {
+                                myBoards.push(board)
+                            }
+                        }
+                    }
+                    console.log(myBoards)
+                    commit('setBoards', myBoards)
                 })
                 .catch(err => {
                     console.error(err)
@@ -398,6 +413,16 @@ export default new vuex.Store({
                     } else {
                         commit('setActiveTasks', { listId: payload.list._id, activeTasks: res.data })
                     }
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        addCollab({ commit, dispatch }, payload) {
+            api
+                .put('boards/' + payload.boardId + '/collabs', payload.friend)
+                .then(res => {
+                    commit('setActiveBoard', res.data)
                 })
                 .catch(err => {
                     console.error(err)

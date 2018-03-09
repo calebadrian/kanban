@@ -6,7 +6,7 @@ var Comments = require("../models/comment")
 var Users = require('../models/user')
 
 router.get("/api/boards", (req, res, next) => {
-    Boards.find({creatorId: req.session.uid})
+    Boards.find(req.query)
         .then(boards => {
             return res.send(boards)
         })
@@ -48,8 +48,6 @@ router.put('/api/users/:userid/name', (req, res, next) => {
         })
         .catch(next)
 })
-
-
 
 router.put('/api/users/:userid/friends', (req, res, next) => {
     Users.findById(req.params.userid)
@@ -133,6 +131,17 @@ router.post("/api/boards/:boardid/lists/:listid/tasks/:taskid/comments", (req, r
 router.put("/api/boards/:boardid", (req, res, next) => {
     Boards.findByIdAndUpdate(req.params.boardid, req.body)
         .then(board => {
+            res.send(board)
+        })
+        .catch(next)
+})
+
+router.put("/api/boards/:boardid/collabs", (req, res, next) => {
+    Boards.findById(req.params.boardid)
+        .then(board => {
+            board.collabs.push(req.body._id)
+            board.markModified('collabs')
+            board.save()
             res.send(board)
         })
         .catch(next)

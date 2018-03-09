@@ -55,6 +55,7 @@
     export default {
         name: 'User',
         mounted() {
+            this.$store.dispatch('authenticate')
             this.$store.dispatch('getBoards')
         },
         data() {
@@ -77,7 +78,11 @@
             },
             removeBoard(event) {
                 var board = JSON.parse(event.dataTransfer.getData('text/javascript'))
-                this.$store.dispatch('removeBoard', board)
+                if (this.$store.state.user._id == board.creatorId){
+                    this.$store.dispatch('removeBoard', board)
+                } else {
+                    alert("You can't delete that Hal")
+                }
             },
             resetFields() {
                 Object.assign(this.$data, this.$options.data.call(this));
