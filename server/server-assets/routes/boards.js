@@ -41,8 +41,9 @@ router.put('/api/users/:userid', (req, res, next) => {
 })
 
 router.put('/api/users/:userid/name', (req, res, next) => {
-    Users.findByIdAndUpdate(req.params.userid, req.body, {new: true})
+    Users.findById(req.params.userid)
         .then(user => {
+            user.name = req.body
             res.send(user)
         })
         .catch(next)

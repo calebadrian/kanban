@@ -46,7 +46,7 @@
                                             <form @submit.prevent="editName(user)" class="form-group d-flex align-items-start">
                                                 <h4>Username:&nbsp;&nbsp;</h4>
                                                 <input type="text" v-model="user.name" placeholder="New Username" class="form-control">
-                                                <button type="submit" class="btn btn-info create" @click="form = !form">Edit</button>
+                                                <button type="submit" class="btn btn-info create" @click="nameForm = !nameForm">Edit</button>
                                             </form>
                                         </div>
                                     <div class="d-flex">
