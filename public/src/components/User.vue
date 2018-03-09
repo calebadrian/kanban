@@ -44,7 +44,6 @@
                 <div class="col-sm-3" v-for="board in boards">
                     <board :board="board"></board>
                 </div>
-
             </div>
         </div>
     </div>

@@ -22,6 +22,8 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <p class="dropdown-item" @click=sortTasksHigh(list)>Priority: Highest to Lowest</p>
                             <p class="dropdown-item" @click=sortTasksLow(list)>Priority: Lowest to Highest</p>
+                            <p class="dropdown-item" @click=sortTasksCreated(rev)>Created: Newest to Oldest</p>
+                            <p class="dropdown-item" @click=sortTasksCreated(!rev)>Created: Oldest to Newest</p>
                             <p class="dropdown-item" @click=sortTasksNameAtoZ>Name: A to Z</p>
                             <p class="dropdown-item" @click=sortTasksNameZtoA>Name: Z to A</p>
                         </div>
@@ -84,6 +86,7 @@
                 },
                 form: false,
                 taskFormHidden: true,
+                rev: true
             }
         },
         methods: {
@@ -134,6 +137,9 @@
                     }
                 }
                 this.$store.dispatch('sortTasks', { list: list, map: map })
+            },
+            sortTasksCreated(rev){
+                this.$store.dispatch('sortTasksCreated', {list: this.list, rev: rev})
             },
             sortTasksNameAtoZ(){
                 var tasks = this.$store.state.activeTasks[this.list._id]

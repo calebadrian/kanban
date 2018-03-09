@@ -382,11 +382,26 @@ export default new vuex.Store({
             api.put('users/' + payload._id + '/name', payload)
                 .then(res => {
                     commit('setUser', res.data)
+
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        },
+        sortTasksCreated({ commit, dispatch }, payload) {
+            api
+                .get('boards/' + payload.list.boardId + '/lists/' + payload.list._id + '/tasks')
+                .then(res => {
+                    if (payload.rev) {
+                        res.data.reverse()
+                        commit('setActiveTasks', { listId: payload.list._id, activeTasks: res.data })
+                    } else {
+                        commit('setActiveTasks', { listId: payload.list._id, activeTasks: res.data })
+                    }
                 })
                 .catch(err => {
                     console.error(err)
                 })
         }
-
     }
 })
