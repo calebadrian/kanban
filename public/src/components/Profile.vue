@@ -9,11 +9,13 @@
             <div class="navbar-nav mr-auto">
                 <h3 class="nav-link">My Pr&#937;file</h3>
             </div>
-            <div>
-                <img :src="user.avatar + user.name" width="50" height="50" class="d-inline-block align-top" alt="">
-            </div>
-            <div>
-                <h6 class="nav-link name">{{user.name}}</h6>
+            <div class="d-flex">
+                <div>
+                    <img :src="user.avatar + user.name" width="50" height="50" class="d-inline-block align-top" alt="">
+                </div>
+                <div>
+                    <h6 class="nav-link name">{{user.name}}</h6>
+                </div>
             </div>
             <div>
                 <button @click="logout" class="btn btn-info">L&#937;g&#937;ut</button>
@@ -42,13 +44,13 @@
                                         <h4>Username: {{user.name}}</h4>
                                         <i class="fas fa-edit" @click="nameForm = !nameForm"></i>
                                     </div>
-                                        <div v-if="nameForm == true">
-                                            <form @submit.prevent="editName(user)" class="form-group d-flex align-items-start">
-                                                <h4>Username:&nbsp;&nbsp;</h4>
-                                                <input type="text" v-model="user.name" placeholder="New Username" class="form-control">
-                                                <button type="submit" class="btn btn-info create" @click="nameForm = !nameForm">Edit</button>
-                                            </form>
-                                        </div>
+                                    <div v-if="nameForm == true">
+                                        <form @submit.prevent="editName(user)" class="form-group d-flex align-items-start">
+                                            <h4>Username:&nbsp;&nbsp;</h4>
+                                            <input type="text" v-model="user.name" placeholder="New Username" class="form-control">
+                                            <button type="submit" class="btn btn-info create" @click="nameForm = !nameForm">Edit</button>
+                                        </form>
+                                    </div>
                                     <div class="d-flex">
                                         <h4>Email: {{user.email}}</h4>
                                     </div>
