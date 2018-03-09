@@ -40,6 +40,16 @@ router.put('/api/users/:userid', (req, res, next) => {
         .catch(next)
 })
 
+router.put('/api/users/:userid/name', (req, res, next) => {
+    Users.findByIdAndUpdate(req.params.userid, req.body, {new: true})
+        .then(user => {
+            res.send(user)
+        })
+        .catch(next)
+})
+
+
+
 router.put('/api/users/:userid/friends', (req, res, next) => {
     Users.findById(req.params.userid)
         .then(user => {
