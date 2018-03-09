@@ -139,6 +139,7 @@
                     }
                 }
                 this.$store.dispatch('addToFriends', { user: user, userToAdd: userToAdd })
+                this.$store.commit('setFoundUser', {})
             },
             removeFromFriends(friend, user) {
                 this.$store.dispatch('removeFromFriends', { user: user, friend: friend })
