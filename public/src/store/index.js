@@ -114,7 +114,7 @@ export default new vuex.Store({
             auth
                 .post('register', payload)
                 .then(res => {
-                    router.push({ name: 'Profile' })
+                    router.push({ name: 'Home' })
                 })
                 .catch(err => {
                     console.log("Invalid username or password")
