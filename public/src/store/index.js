@@ -135,6 +135,8 @@ export default new vuex.Store({
             api
                 .get('boards')
                 .then(res => {
+                    console.log(res.data)
+                    console.log(state.user._id)
                     var myBoards = []
                     for (var i = 0; i < res.data.length; i++) {
                         var board = res.data[i]
@@ -143,12 +145,14 @@ export default new vuex.Store({
                             continue
                         }
                         for (var j = 0; j < board.collabs.length; j++) {
-                            var collab = board.collabs[i]
+                            debugger
+                            var collab = board.collabs[j]
                             if (collab == state.user._id) {
                                 myBoards.push(board)
                             }
                         }
                     }
+                    console.log(myBoards)
                     commit('setBoards', myBoards)
                 })
                 .catch(err => {
@@ -313,6 +317,7 @@ export default new vuex.Store({
             api
                 .get('boards/' + payload.boardId + '/lists/' + payload.listId + '/tasks/' + payload.taskId + '/comments')
                 .then(res => {
+                    console.log(res.data)
                     commit('setActiveComments', { taskId: payload.taskId, activeComments: res.data })
                 })
                 .catch(err => {

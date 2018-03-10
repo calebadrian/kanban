@@ -30,7 +30,7 @@
                 <div class="col-sm-12 lists">
                     <button @click="form = !form" class="btn colorful">+ Create List</button>
                     <div class="d-flex">
-                        <!-- <div class="dropdown wide">
+                        <div class="dropdown wide" v-if="user._id == activeBoard.creatorId">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 Add Collaborator
@@ -40,7 +40,7 @@
                                     <p class="dropdown-item" @click="addCollab(friend)">{{friend.name}}</p>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <button @click="deets = !deets" class="btn colorful">B&#937;ard Details</button>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                 Object.assign(this.$data, this.$options.data.call(this));
             },
             addCollab(friend){
-                this.$store.dispatch('addCollab', {boardId: this.$store.state.activeBoard._id, friend: friend})
+                this.$store.dispatch('addCollab', {boardId: this.$route.params.boardId, friend: friend})
             }
         },
         computed: {

@@ -88,7 +88,8 @@
         data() {
             return {
                 comment: {
-                    body: ''
+                    body: '',
+                    creatorName: this.$store.state.user.name
                 },
                 commentFormHidden: true,
                 form: false
