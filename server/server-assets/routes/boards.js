@@ -65,7 +65,7 @@ router.put('/api/users/:userid/friends', (req, res, next) => {
 })
 
 router.get("/api/boards/:boardid", (req, res, next) => {
-    Boards.find({creatorId: req.session.uid, _id: req.params.boardid})
+    Boards.findById(req.params.boardid)
         .then(board => {
             return res.send(board)
         })

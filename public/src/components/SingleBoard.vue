@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="navbar-nav mr-auto">
-                <h3 class="nav-link" v-if="activeBoard[0]">{{activeBoard[0].name}}</h3>
+                <h3 class="nav-link" v-if="activeBoard">{{activeBoard.name}}</h3>
             </div>
             <router-link :to="{name: 'Profile', params: {userId: user._id}}" class="title d-flex">
                 <div>
@@ -55,7 +55,7 @@
                     <div class="row">
                         <div v-if="deets == true" class="card">
                             <div class="card-body">
-                                <h5>{{activeBoard[0].description}}</h5>
+                                <h5>{{activeBoard.description}}</h5>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
         methods: {
             createList() {
                 this.list.creatorId = this.$store.state.user._id
-                this.list.boardId = this.$store.state.activeBoard[0]._id
+                this.list.boardId = this.$route.params.boardId
                 this.$store.dispatch('addList', this.list)
                 this.resetFields()
             },
@@ -100,7 +100,7 @@
                 Object.assign(this.$data, this.$options.data.call(this));
             },
             addCollab(friend){
-                this.$store.dispatch('addCollab', {boardId: this.$store.state.activeBoard[0]._id, friend: friend})
+                this.$store.dispatch('addCollab', {boardId: this.$store.state.activeBoard._id, friend: friend})
             }
         },
         computed: {
