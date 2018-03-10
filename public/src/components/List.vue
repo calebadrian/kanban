@@ -4,7 +4,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-center">
                     <h4 class="title">{{list.name}}</h4>
-                    <i class="fas fa-edit" @click="form = !form"></i>
+                    <i class="fas fa-edit" @click="form = !form" v-if="user._id == list.creatorId"></i>
                 </div>
                 <div v-if="form == true" class="col-sm-12">
                     <form @submit.prevent="editList(list)" class="form-group">
@@ -63,7 +63,7 @@
                 <div v-for="task in activeTasks">
                     <task :task="task"></task>
                 </div>
-                <button class="btn btn-link" @click="removeList(list)">Delete List</button>
+                <button class="btn btn-link" @click="removeList(list)" v-if="user._id == list.creatorId">Delete List</button>
             </div>
         </div>
     </div>
@@ -94,7 +94,7 @@
                 this.taskFormHidden = !this.taskFormHidden
                 this.task.creatorId = this.$store.state.user._id
                 this.task.listId = list._id
-                this.task.boardId = this.$store.state.activeBoard[0]._id
+                this.task.boardId = list.boardId
                 this.$store.dispatch('addTask', this.task)
                 this.resetFields()
             },
@@ -189,6 +189,9 @@
             activeTasks() {
                 return this.$store.state.activeTasks[this.list._id] || []
             },
+            user(){
+                return this.$store.state.user
+            }
         },
         components: {
             Task,

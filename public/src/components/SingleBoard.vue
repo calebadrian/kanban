@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="navbar-nav mr-auto">
-                <h3 class="nav-link" v-if="activeBoard[0]">{{activeBoard[0].name}}</h3>
+                <h3 class="nav-link" v-if="activeBoard">{{activeBoard.name}}</h3>
             </div>
             <router-link :to="{name: 'Profile', params: {userId: user._id}}" class="title d-flex">
                 <div>
@@ -30,7 +30,7 @@
                 <div class="col-sm-12 lists">
                     <button @click="form = !form" class="btn colorful">+ Create List</button>
                     <div class="d-flex">
-                        <!-- <div class="dropdown wide">
+                        <div class="dropdown wide" v-if="user._id == activeBoard.creatorId">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 Add Collaborator
@@ -40,7 +40,7 @@
                                     <p class="dropdown-item" @click="addCollab(friend)">{{friend.name}}</p>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <button @click="deets = !deets" class="btn colorful">B&#937;ard Details</button>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <div class="row">
                         <div v-if="deets == true" class="card">
                             <div class="card-body">
-                                <h5>{{activeBoard[0].description}}</h5>
+                                <h5>{{activeBoard.description}}</h5>
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
         methods: {
             createList() {
                 this.list.creatorId = this.$store.state.user._id
-                this.list.boardId = this.$store.state.activeBoard[0]._id
+                this.list.boardId = this.$route.params.boardId
                 this.$store.dispatch('addList', this.list)
                 this.resetFields()
             },
@@ -100,7 +100,7 @@
                 Object.assign(this.$data, this.$options.data.call(this));
             },
             addCollab(friend){
-                this.$store.dispatch('addCollab', {boardId: this.$store.state.activeBoard[0]._id, friend: friend})
+                this.$store.dispatch('addCollab', {boardId: this.$route.params.boardId, friend: friend})
             }
         },
         computed: {

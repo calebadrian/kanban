@@ -1,10 +1,10 @@
 <template>
     <div class="comment">
         <div class="comment">
-            <h5>{{userForComment.name}}:&nbsp;&nbsp;&nbsp;</h5>
+            <h5>{{comment.creatorName}}:&nbsp;&nbsp;&nbsp;</h5>
             <p>{{comment.body}}</p>
         </div>
-        <i class="fas fa-minus-circle" @click="removeComment(comment)"></i>
+        <i class="fas fa-minus-circle" @click="removeComment(comment)" v-if="user._id == comment.creatorId"></i>
     </div>
 </template>
 
@@ -28,6 +28,9 @@
         computed: {
             userForComment() {
                 return this.$store.state.userForComment
+            },
+            user() {
+                return this.$store.state.user
             }
         }
     }

@@ -8,6 +8,7 @@ var schema = new Schema({
     listId: {type: ObjectId, ref: 'List', required: true},
     boardId: {type: ObjectId, ref: 'Board', required: true},
     creatorId: {type: ObjectId, ref: 'User', required: true},
+    creatorName: {},
     body: {type: String, required: true}
 })
 

@@ -6,7 +6,7 @@
                     <h4 class="title">
                         <router-link :to="{name: 'Board', params: {boardId: board._id}}" class="title">{{board.name}}</router-link>
                     </h4>
-                    <i class="fas fa-edit" @click="form = !form"></i>
+                    <i class="fas fa-edit" @click="form = !form" v-if="user._id == board.creatorId"></i>
                 </div>
                 <div v-if="form == true" class="col-sm-12">
                     <form @submit.prevent="editBoard(board)" class="form-group">
@@ -43,6 +43,11 @@
         },
         components: {
 
+        },
+        computed: {
+            user(){
+                return this.$store.state.user
+            }
         }
     }
 

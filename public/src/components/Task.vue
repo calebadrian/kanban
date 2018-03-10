@@ -5,7 +5,7 @@
                 <div>
                     <div class="d-flex justify-content-center">
                         <h5 class="title">{{task.description}}</h5>
-                        <i class="fas fa-edit" @click="form = !form"></i>
+                        <i class="fas fa-edit" @click="form = !form" v-if="user._id == task.creatorId"></i>
                     </div>
                     <div v-if="form == true" class="col-sm-12">
                         <form @submit.prevent="editTask(task)">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-link" @click="removeTask(task)" data-dismiss="modal">Rem&#937;ve {{task.description}}</button>
+                        <button class="btn btn-link" @click="removeTask(task)" data-dismiss="modal" v-if="user._id == task.creatorId">Rem&#937;ve {{task.description}}</button>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,8 @@
         data() {
             return {
                 comment: {
-                    body: ''
+                    body: '',
+                    creatorName: this.$store.state.user.name
                 },
                 commentFormHidden: true,
                 form: false
@@ -103,6 +104,9 @@
             },
             activeLists() {
                 return this.$store.state.activeLists
+            },
+            user() {
+                return this.$store.state.user
             }
         },
         methods: {
