@@ -30,7 +30,7 @@ export default new vuex.Store({
         activeTasks: [],
         activeComments: [],
         movingTask: {},
-        userForComment: {}
+        userForComment: {} 
     },
     mutations: {
         setUser(state, payload) {
